@@ -1,9 +1,5 @@
 --this is the script that builds our tables for the database
---users currently has a tone of data
---we might concider breaking it up into 
---a couple tables, ex: a weakness
---strenght a time avaibliy table linked
---to the pk of each user
+
 --OH, pk: primary key
 --fk: foreign key
 --ask Amber for questions
@@ -15,7 +11,9 @@ lastName varchar(16),
 hasATeam BOOLEAN not null default FALSE
 );
 
-create table strengths(
+
+create table strength(
+
 user_fk integer REFERENCES users (user_pk),
 sJava BOOLEAN not null default FALSE,
 sCPP BOOLEAN not null default FALSE,
@@ -31,7 +29,8 @@ sGIS BOOLEAN not null default FALSE,
 sPython BOOLEAN not null default FALSE,
 sPMO BOOLEAN not null default FALSE);
 
-create table weekness(
+
+create table weakness(
 user_fk integer REFERENCES users (user_pk),
 wJava BOOLEAN not null default FALSE,
 wCPP BOOLEAN not null default FALSE,
@@ -47,7 +46,9 @@ wGIS BOOLEAN not null default FALSE,
 wPython BOOLEAN not null default FALSE,
 wPMO BOOLEAN not null default FALSE);
 
-create table avaibliy(
+
+create table times(
+
 user_fk integer REFERENCES users (user_pk),
 mon8to10 BOOLEAN not null default FALSE,
 mon10to12 BOOLEAN not null default FALSE,
