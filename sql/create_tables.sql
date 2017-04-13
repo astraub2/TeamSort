@@ -102,5 +102,7 @@ first_fk integer REFERENCES users (user_pk),
 second_fk integer REFERENCES users (user_pk),
 third_fk integer REFERENCES users (user_pk),
 fourth_fk integer REFERENCES users (user_pk),
-fifth_fk integer REFERENCES users (user_pk)
+fifth_fk integer REFERENCES users (user_pk),
+teamIsFull BOOLEAN not null default FALSE
+
 );
