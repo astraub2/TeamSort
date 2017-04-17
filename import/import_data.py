@@ -17,8 +17,16 @@ def import_users():
                                 else:
                                         boolan.append('')
                                 i=i+1
-                        print("INSERT INTO languages (username, JAVA, CPP, SQL, HTML, PHP, Javascript, Bash, Git, Mongo, WSS, GIS, Python, PMO) VALUES (s[0],'{}', '{}', '{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}', );".format (boolan[0], boolan[1],boolan[2],boolan[3],boolan[4],boolan[5],boolan[6],boolan[7],boolan[8],boolan[9], boolan[10],boolan[11], boolan[12]))
-                        times=[s[2],s[3],s[4],s[5],s[6],s[7],s[8],s[9],s[10],s[11],s[12],s[13],s[14],s[15],s[16], s[17],s[18],s[19],s[20],s[21],s[22],s[23],s[24],s[25],s[26],s[27],s[28],s[29],s[30], s[31],s[32],s[33],s[34],s[35],s[36]]
+                        print("INSERT INTO languages (username, JAVA, CPP, SQL, HTML, PHP, Javascript, Bash,\
+                              Git, Mongo, WSS, GIS, Python, PMO) VALUES (s[0],'{}', '{}', '{}','{}','{}',\
+                              '{}','{}','{}','{}','{}','{}','{}','{}', );".format\
+                              (boolan[0], boolan[1],boolan[2],boolan[3],boolan[4],
+                               boolan[5],boolan[6],boolan[7],boolan[8],boolan[9],
+                               boolan[10],boolan[11], boolan[12]))
+                        times=[s[2],s[3],s[4],s[5],s[6],s[7],s[8],s[9],s[10],s[11],
+                               s[12],s[13],s[14],s[15],s[16], s[17],s[18],s[19],s[20],
+                               s[21],s[22],s[23],s[24],s[25],s[26],s[27],s[28],s[29],
+                               s[30], s[31],s[32],s[33],s[34],s[35],s[36]]
                         
                         scheduals = ["Monday 8 AM to 10 AM", "Monday 10 AM to 12 PM", "Monday 12PM to 2 PM", "Monday 2 PM to 4 PM", "Monday 4 PM to 6 PM",
                         "Tuesday 8 AM to 10 AM", "Tuesday 10 AM to 12 PM", "Tuesday 12 PM to 2 PM", "Tuesday 2 PM to 4 PM", "Tuesday 4 PM to 6 PM",
