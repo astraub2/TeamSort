@@ -7,8 +7,9 @@
 create table users
 (user_pk serial primary key,
 username varchar(64),
-hasATeam BOOLEAN not null default FALSE)
-teammate varchar(64);
+hasATeam BOOLEAN not null default FALSE,
+teammate varchar(64)
+);
 
 
 create table languages(
