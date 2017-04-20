@@ -8,7 +8,6 @@ cd sql
 psql teamsort -f create_tables.sql
 echo "Database made, tables made"
 cd ../import
-
 #now we need to run our import script
 #we need the directory and name of import file
 # if [ "$#" -ne 2 ]; then
@@ -23,13 +22,13 @@ echo "Import script done, data imported"
 #magic python script to read through csv files etc
 #insert that data into the database
 
-
 #PART 2
 
 #This is where the python script that sorts the 
 #data in the database will go
 #the python script will need the name of the database
-#python3 TeamSort.py teamdata
+cd ../src
+python TeamSort.py
 
 #Part 3
 #This is where the python script that prints out the 
