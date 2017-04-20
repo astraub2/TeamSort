@@ -2,21 +2,27 @@ import psycopg2
 #psycopg2 is our database connector
 
 def main():
-        #the var in conn will change, this is temp
         conn = psycopg2.connect(dbname='teamsort')
         cur = conn.cursor()
 
-        # #Below is a general query format for database info
+        #Below is a general query format for database info
         cur.execute('SELECT username FROM users;')
+        #Lets grab all of the usernames for the database:
 
-        # #essentially check if the query returned anything
-        # try:
-        #     result = cur.fetchone()
-        # except ProgrammingError:
-        #     result = None
-        # if result == None:
+        #essentially check if the query returned anything
+        try:
+            result = cur.fetchall()
+        except ProgrammingError:
+            result = None
+        if result == None:
+            print("nothing")
 
-        # else:
+        else:
+            for i in result:
+                #this prints only the string value of the name
+                print(i[0])
+            
+
         #   #result may hold a Boolean, int, string, etc,
         #   #check if result is what you want
 
@@ -30,4 +36,4 @@ def main():
 
 
 if __name__ == "__main__":
-main()
+    main()
