@@ -15,19 +15,19 @@ teammate varchar(64)
 create table languages(
 user_fk integer REFERENCES users (user_pk),
 username varchar(64),
-Java varchar(64),
-CPP varchar(64),
-SQL varchar(64),
-HTML varchar(64),
-PHP varchar(64),
-Javascript varchar(64),
-Bash varchar(64),
-Git varchar(64),
-Mongo varchar(64),
-WSS varchar(64),
-GIS varchar(64),
-Python varchar(64),
-PMO varchar(64));
+Java int,
+CPP int,
+SQL int,
+HTML int,
+PHP int,
+Javascript int,
+Bash int,
+Git int,
+Mongo int,
+WSS int,
+GIS int,
+Python int,
+PMO int);
 
 
 create table times(
