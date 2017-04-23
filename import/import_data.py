@@ -39,9 +39,9 @@ def import_users():
                         sch=[]
                         for t in times:
                                 if t=='yes':
-                                        sch.append(scheduals[i])
+                                        sch.append(i)
                                 else:
-                                        sch.append('')
+                                        sch.append(100)
                                 i=i+1
                         print("INSERT INTO times (username, mon8to10, mon10to12, mon12to2, mon2to4,mon4to6,tue8to10,\
                               tue10to12,tue12to2,tue2to4,tue4to6) VALUES\

@@ -1,4 +1,3 @@
-!/usr/bin/env python3
 
 # Vinitha Gadiraju
 # Algorithm
@@ -10,7 +9,7 @@ import pdb
 import copy
 
 # Using static data.  Set this to false to use data from database
-TEST_DATA = True
+TEST_DATA = False
 
 test_data = {
 	"group_count" : 5,
@@ -57,21 +56,55 @@ class UserData:
 		if TEST_DATA:
 			user_count = len(self.db["users"])
 		else:
-			# TODO - Get user count from database
-			pass 
+			conn = psycopg2.connect(dbname='teamsort')
+	        cur = conn.cursor()
+	        #Below is a general query format for database info
+	        cur.execute('SELECT username FROM users;')
+	        try:
+	            result = cur.fetchall()
+	        except ProgrammingError:
+	            result = None
+	        if result == None:
+	            user_count=0
+
+	        else:
+	        	user_count=0
+	        	for i in result:
+	        		user_count+=1
+			
 
 		return user_count
 
 	def get_group_count(self):
 		# Read group count from database
-		group_count = 0
-		if TEST_DATA:
-			group_count = self.db["group_count"]
-		else:
-			# TODO:  Get this data from database
-			pass 
+		# We need to know group size
 
-		return group_count
+		group_count = 0
+		
+		conn = psycopg2.connect(dbname='teamsort')
+        cur = conn.cursor()
+        #Below is a general query format for database info
+        cur.execute('SELECT username FROM users;')
+        try:
+            result = cur.fetchall()
+        except ProgrammingError:
+            result = None
+            user_count=0
+
+        if result == None:
+            user_count=0
+
+        else:
+        	user_count=0
+        	for i in result:
+        		user_count+=1
+        
+
+        	return group_count
+	    # this is where you need to calculate how many groups there need to be made
+	    # user_count is the number of students
+	    #we will figure out a way to get group size
+		
 
 	def get_next_user(self):
 		# Read next user from database
@@ -85,6 +118,7 @@ class UserData:
 			# the next_user should be provided in the following format
 			# ["usr_name0", [list of schedules], [list of strengths], [list of weaknesses], [list of preferred_teammate]]
 			# example:  ["vinitha", [4,3,1], [5,6,7], [1,2], ["nivitha", "vidya"]]
+
 			next_user = None 
 
 		return next_user
@@ -234,7 +268,7 @@ class Groups:
 		self._compute_group_score(group)
 
 	def print_scores(self, group_index):
-		print(self.groups[group_index][G_NDX_SCORE], end = "  ")
+		#print(self.groups[group_index][G_NDX_SCORE], end = "  ")
 		print(list(self.groups[group_index][G_NDX_USERS].keys()))
 
 	def get_group_score(self, group):
