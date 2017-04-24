@@ -27,7 +27,7 @@ def getnames():
 	else:
 	    for i in result:
 	        usernames.append(i[0])
-	print (usernames)
+	#print (usernames)
 	return usernames
 def gettimes():
 	conn = psycopg2.connect(dbname='teamsort')
@@ -93,8 +93,8 @@ def getstrengths():
 			allweak.append(weaknesses)
 			weaknesses=[]
 			strengths=[]
-	print(allstreng)
-	print(allweak)
+	#print(allstreng)
+	#print(allweak)
 	return allstreng, allweak
 def getpreferance():
 	conn = psycopg2.connect(dbname='teamsort')
@@ -112,7 +112,7 @@ def getpreferance():
 		for i in result:
 			pref.append(i[3])
 
-		print(pref)
+		#print(pref)
 
 	return pref
 
@@ -141,6 +141,7 @@ def generateUserData(groupcount):
                         "Sunday 8 AM to 10 AM", "Sunday 10 AM to 12 PM", "Sunday 12 PM to 2 PM", "Sunday 2 PM to 4 PM", "Sunday 4 PM to 6 PM"],
 	"skill_list" :['JAVA', 'CPP', 'SQL', 'HTML', 'PHP', 'Javascript', 'Bash', 'Git', 'Mongo', 'WSS', 'GIS', 'Python', 'PMO'],
 	"users" : userdata}
+	#print(data)
 	return data
 
 
@@ -189,7 +190,7 @@ pp = pprint.PrettyPrinter(indent=4)
 class UserData:
 	def __init__(self):
 		if TEST_DATA:
-			self.db = generateUserData(1)
+			self.db = generateUserData(3)
 		else:
 			# TODO - Initialize the postgre database and store a reference to database
 			pass  
