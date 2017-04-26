@@ -1,62 +1,23 @@
-#sample app
+from tkinter import *
 
-from Tkinter import *
-import webbrowser
+def show_entry_fields():
+   print("Filename: %s\nGroup Size: %s" % (e1.get(), e2.get()))
+   e1.delete(0,END)
+   e2.delete(0,END)
 
-class Application(Frame):
+master = Tk()
+Label(master, text="Filename").grid(row=0)
+Label(master, text="Group Size").grid(row=1)
 
-    def say_hi(self):
-        print "hi there, everyone!"
-    def callback(self):
-        webbrowser.open_new(r"http://www.google.com")
+e1 = Entry(master)
+e2 = Entry(master)
+#e1.insert(12,"Miller")
+#e2.insert(12,"Jill")
 
-    def userinput(self):
-        a = raw_input(self.E1.get())
-        print a
+e1.grid(row=0, column=1)
+e2.grid(row=1, column=1)
 
-    #def getSize(self):
-        
+Button(master, text='Quit', command=master.quit).grid(row=3, column=0, sticky=W, pady=4)
+Button(master, text='Generate Groups', command=show_entry_fields).grid(row=3, column=1, sticky=W, pady=4)
 
-    def createWidgets(self):
-        self.QUIT = Button(self)
-        self.QUIT["text"] = "QUIT"
-        self.QUIT["fg"]   = "red"
-        self.QUIT["command"] =  self.quit
-
-        self.QUIT.pack({"side": "right"})
-
-        self.hi_there = Button(self)
-        self.hi_there["text"] = "Hello",
-        self.hi_there["command"] = self.say_hi
-
-        self.hi_there.pack({"side": "left"})
-
-        self.LINK = Button(self)
-        self.LINK["text"] = "Google Hyperlink"
-        self.LINK["command"] = self.callback
-        self.LINK.pack({"side": "left"})
-
-        # self.label1 = Label( root, text="Group Size:")
-        # self.E1 = Entry(root, bd =5)
-        # self.label1.pack({"side": "bottom"})
-        # self.E1.pack({"side": "bottom"})
-        self.label1 = Label( root, text="Group Size:")
-        self.E1 = Entry(root, bd =5)
-        self.label1.pack({"side": "left"})
-        self.E1.pack({"side": "left"})
-
-        self.submit = Button(self)
-        self.submit["text"] = "Submit"
-        self.submit["command"] = self.userinput
-        self.submit.pack({"side": "left"})
-
-    def __init__(self, master=None):
-        Frame.__init__(self, master)
-        self.pack()
-        self.createWidgets()
-
-
-root = Tk()
-app = Application(master=root)
-app.mainloop()
-root.destroy()
+mainloop( )
