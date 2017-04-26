@@ -1,6 +1,7 @@
 
 # Vinitha Gadiraju
 # Algorithm
+from Tkinter import *
 
 import random
 import time
@@ -9,7 +10,10 @@ import pdb
 import copy
 import psycopg2
 
+
+
 # Using static data.  Set this to false to use data from database
+
 TEST_DATA = True
 def getnames():
 	conn = psycopg2.connect(dbname='teamsort')
@@ -384,7 +388,7 @@ class Groups:
 		return group[G_NDX_SCORE]
 
 
-def main():
+def main(size):
 	# pdb.set_trace()
 	random.seed(int(time.time()))
 	groups = Groups()
@@ -415,6 +419,26 @@ def main():
 	print("==== Groups after simulation ====")
 	for i in range(group_size):
 		groups.print_scores(i)
+def show_entry_fields():
+	size=e1.get()
+	print("Group Size: %s" % (size))
+	e1.delete(0,END)
+	master.quit()
+	main(size)
+master = Tk()
 
-if __name__ == '__main__':
-	main()
+Label(master, text="Group Size").grid(row=0)
+
+e1 = Entry(master)
+#e1.insert(12,"Miller")
+#e2.insert(12,"Jill")
+
+e1.grid(row=0, column=1)
+
+
+Button(master, text='Quit', command=master.quit).grid(row=3, column=0, sticky=W, pady=4)
+Button(master, text='Generate Groups', command=show_entry_fields).grid(row=3, column=1, sticky=W, pady=4)
+mainloop( )
+
+# if __name__ == '__main__':
+# 	main()

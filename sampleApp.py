@@ -1,26 +1,23 @@
-#sample app
+from tkinter import *
 
-import tkinter as tk
+def show_entry_fields():
+   print("Filename: %s\nGroup Size: %s" % (e1.get(), e2.get()))
+   e1.delete(0,END)
+   e2.delete(0,END)
 
-class Application(tk.Frame):
-    def __init__(self, master=None):
-        super().__init__(master)
-        self.pack()
-        self.create_widgets()
+master = Tk()
+Label(master, text="Filename").grid(row=0)
+Label(master, text="Group Size").grid(row=1)
 
-    def create_widgets(self):
-        self.hi_there = tk.Button(self)
-        self.hi_there["text"] = "Hello World\n(click me)"
-        self.hi_there["command"] = self.say_hi
-        self.hi_there.pack(side="top")
+e1 = Entry(master)
+e2 = Entry(master)
+#e1.insert(12,"Miller")
+#e2.insert(12,"Jill")
 
-        self.quit = tk.Button(self, text="QUIT", fg="red",
-                              command=root.destroy)
-        self.quit.pack(side="bottom")
+e1.grid(row=0, column=1)
+e2.grid(row=1, column=1)
 
-    def say_hi(self):
-        print("hi there, everyone!")
+Button(master, text='Quit', command=master.quit).grid(row=3, column=0, sticky=W, pady=4)
+Button(master, text='Generate Groups', command=show_entry_fields).grid(row=3, column=1, sticky=W, pady=4)
 
-root = tk.Tk()
-app = Application(master=root)
-app.mainloop()
+mainloop( )

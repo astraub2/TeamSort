@@ -16,7 +16,7 @@ cd ../import
 # fi
 #for now, input needs to be a file called "userdata.csv"
 #in the import folder
-python3 import_data.py > import_data.sql
+python import_data.py > import_data.sql
 psql -d teamsort -f import_data.sql
 echo "Import script done, data imported"
 #magic python script to read through csv files etc
