@@ -190,7 +190,7 @@ pp = pprint.PrettyPrinter(indent=4)
 class UserData:
 	def __init__(self):
 		if TEST_DATA:
-			self.db = generateUserData(3)
+			self.db = generateUserData(1)
 		else:
 			# TODO - Initialize the postgre database and store a reference to database
 			pass  
