@@ -56,23 +56,26 @@ Finally, if a teammate is placed in a group with someone they preferred, the sco
 
 First, the program randomly assigns students to a team. Then the teams will be shuffled 1000 times with the intent of maximizing team scores to create higher compatibility. After maximizing, the algorithm will output what the new teams are.
 
-GUI Interface:
-We decided to be able to read in the user's input on how many groups they would like to have.
-We also wanted the user to be able to specify a CSV file if they already had the data instead of forcing them to manually input the data.
 ---------------------------------------------------------------------
 ---------------------------------------------------------------------
 User Guide:
 
-Open the command line and clone this repository to your machine. You will need a basic understanding of git and command line interfaces to run this program. Verify that all required applications are in fact installed. 
-
-Once you recieve your data back from your students, use Google Poll to download the csv file to your local machine. 
-Enclosed will be a Google Poll. Please note that this software depends on the Google Poll format staying static, please do not make changes to the poll. You have "editing" privlages on the poll so that you may be able to download the CSV file.
+Open the command line and clone this repository to your machine. You will need a basic understanding of git and command line interfaces to run this program. Verify that all required applications are in fact installed.
+ 
+Enclosed is a Google Poll. Please note that this software depends on the Google Poll format staying static, please do not make changes to the poll. You have "editing" privlages on the poll so that you are able to download the CSV file:
 
 https://docs.google.com/forms/d/e/1FAIpQLSdBOL2BnhtfO0yrURINfBG4C0iZw634bc6RT6PMCQkvh1o5bQ/viewform?usp=sf_link
+
+Share this poll with your studentsto get thier data. Once you recieve your data back from your students, use Google Poll to download the csv file to your local machine. 
  
 It is important that you:
 --save the csv file in the import folder
 --name the file "userdata.csv"
+
+*******
+If you would like to test TeamSort without generating data, good news!!! We have a userdata.csv already generated for you.
+
+*******
 
 You can now run the TeamSort simulation. From the repo home there is a file called TeamSort.sh. Run the following command:
 
