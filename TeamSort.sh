@@ -28,7 +28,7 @@ echo "Import script done, data imported"
 #data in the database will go
 #the python script will need the name of the database
 cd ../src
-python3 TeamSortAlg.py
+python TeamSortAlg.py
 
 #Part 3
 #This is where the python script that prints out the 

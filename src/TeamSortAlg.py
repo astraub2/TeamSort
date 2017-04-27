@@ -333,7 +333,7 @@ class Groups:
 		self._compute_group_score(group)
 
 	def print_scores(self, group_index):
-		print(self.groups[group_index][G_NDX_SCORE], end = "  ")
+		#print(self.groups[group_index][G_NDX_SCORE], end = "  ")
 		print(list(self.groups[group_index][G_NDX_USERS].keys()))
 
 	def get_group_score(self, group):
