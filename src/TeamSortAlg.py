@@ -12,7 +12,7 @@ import psycopg2
 
 
 # Using static data.  Set this to false to use data from database
-TEST_DATA = False
+TEST_DATA = True
 
 test_data = {
 	"group_count" : 5,
@@ -41,7 +41,8 @@ test_data = {
 		["roger", [3,4,1], ["Java", "C"], ["C++"], ["subbu", "manju", "willl"]],
 		["subbu", [6,2,4], ["Python", "PHP", "JavaScript", "Web Server", "shell"], ["Java", "C", "C++"], ["will", "sue", "perd"]]
 	],
-	"current_index" : 0
+	"current_index" : 0,
+	"priority" : [2,1,1]
 }
 
 def getnames():
@@ -131,6 +132,7 @@ def getstrengths():
 	#print(allstreng)
 	#print(allweak)
 	return allstreng, allweak
+
 def getpreferance():
 	conn = psycopg2.connect(dbname='teamsort')
 	cur = conn.cursor()
@@ -179,7 +181,6 @@ def generateUserData(groupcount):
 	#print(data)
 	return data
 
-
 pp = pprint.PrettyPrinter(indent=4)
 
 class UserData:
@@ -216,6 +217,9 @@ class UserData:
 	def get_skill_list(self):
 		return self.db["skill_list"]
 
+	def get_priorities(self):
+		return self.db["priority"]
+
 # User indices
 U_NDX_NAME = 0
 U_NDX_SCHD = 1
@@ -228,7 +232,9 @@ G_NDX_SCORE = 0
 G_NDX_USERS = 1
 
 # Points
-MATCH_POINTS_INCREMENT = 1
+PRIORITY_SCHED = 0
+PRIORITY_SKILL = 1
+PRIORITY_PREF = 2
 
 class Groups:
 	def __init__(self, groupcount):
@@ -238,7 +244,6 @@ class Groups:
 		'''
 		schedules = ["Monday 8 AM to 10 AM", "Monday 10 AM to 12 PM", .......]
 		skills = ["Java", "C", "C++", "Python", "PHP", "JavaScript", "Web Server", "shell"]
-
 		group[i] = [
 			computed_group_weight, 
 			{
@@ -248,11 +253,12 @@ class Groups:
 				"usr_name3" : ["usr_name3", [list of schedules], [list of strengths], [list of weaknesses], [list of preferred_teammate]],
 			},
 		]
-
 		'''
 
 		# Initialize the database.
 		db = UserData()
+
+		self.priority = db.get_priorities()
 
 		# Fetch the number of users and number of groups
 		N = db.get_user_count()
@@ -297,15 +303,15 @@ class Groups:
 
 				for i in group[G_NDX_USERS][user][U_NDX_SCHD]:
 					if i in group[G_NDX_USERS][other][U_NDX_SCHD]:
-						group[G_NDX_SCORE] += MATCH_POINTS_INCREMENT
+						group[G_NDX_SCORE] += self.priority[PRIORITY_SCHED]
 
 				for i in group[G_NDX_USERS][user][U_NDX_WEAK]:
 					if i in group[G_NDX_USERS][other][U_NDX_STRN]:
-						group[G_NDX_SCORE] += MATCH_POINTS_INCREMENT
+						group[G_NDX_SCORE] += self.priority[PRIORITY_SKILL]
 
 				for i in group[G_NDX_USERS][user][U_NDX_TEAM]:
 					if i == group[G_NDX_USERS][other][U_NDX_NAME]:
-						group[G_NDX_SCORE] += MATCH_POINTS_INCREMENT
+						group[G_NDX_SCORE] += self.priority[PRIORITY_PREF]
 
 
 	def get_size(self):
@@ -332,12 +338,45 @@ class Groups:
 		del group[G_NDX_USERS][user_name]
 		self._compute_group_score(group)
 
+	def set_priority(self, arr_priority):
+		self.priority = arr_priority
+
 	def print_scores(self, group_index):
-		#print(self.groups[group_index][G_NDX_SCORE], end = "  ")
+		print(self.groups[group_index][G_NDX_SCORE], end = "  ")
 		print(list(self.groups[group_index][G_NDX_USERS].keys()))
 
 	def get_group_score(self, group):
 		return group[G_NDX_SCORE]
+
+	def get_group(self, index):
+		if index < self.get_size():
+			return self.groups[index]
+		else:
+			return None 
+
+	def run_simulation(self, arr_group):
+		for i in range(5000):
+			rg1 = self.get_group(random.choice(arr_group))
+			rg2 = self.get_group(random.choice(arr_group))
+
+			if rg1 == rg2: continue
+			rg1_score = self.get_group_score(rg1)
+			rg2_score = self.get_group_score(rg2)
+
+			user1 = self.extract_random_user_from_group(rg1)
+			user2 = self.extract_random_user_from_group(rg2)
+
+			self.add_user_to_group(rg1, user2)
+			self.add_user_to_group(rg2, user1)
+
+			new_rg1_score = self.get_group_score(rg1)
+			new_rg2_score = self.get_group_score(rg2)
+
+			if new_rg1_score < rg1_score or new_rg2_score < rg2_score or new_rg1_score < new_rg2_score:
+				self.remove_user_from_group(rg1, user2[U_NDX_NAME])
+				self.add_user_to_group(rg1, user1)
+				self.remove_user_from_group(rg2, user1[U_NDX_NAME])
+				self.add_user_to_group(rg2, user2)
 
 
 def main():
@@ -352,25 +391,24 @@ def main():
 		groups.print_scores(i)
 
 	print("Working...")
-	for i in range(5000):
-		rg1 = groups.get_random_group()
-		rg2 = groups.get_random_group()
-
-		if rg1 == rg2: continue
-
-		user1 = groups.extract_random_user_from_group(rg1)
-		user2 = groups.extract_random_user_from_group(rg2)
-
-		groups.add_user_to_group(rg1, user2)
-		groups.add_user_to_group(rg2, user1)
-
-		if groups.get_group_score(rg1) < groups.get_group_score(rg2):
-			groups.remove_user_from_group(rg1, user2[U_NDX_NAME])
-			groups.add_user_to_group(rg1, user1)
-			groups.remove_user_from_group(rg2, user1[U_NDX_NAME])
-			groups.add_user_to_group(rg2, user2)
+	arr_group = range(group_size)
+	groups.run_simulation(arr_group)
 
 	print("==== Groups after simulation ====")
+	for i in range(group_size):
+		groups.print_scores(i)
+
+	arr_group = [0,1,2]
+	groups.run_simulation(arr_group)
+	print("==== Groups after sub-group simulation ====")
+	for i in range(group_size):
+		groups.print_scores(i)
+
+	arr_priority = [1,1,2]
+	groups.set_priority(arr_priority)
+	groups.run_simulation(arr_group)
+
+	print("==== Groups after changing priority (sched to teammate) ====")
 	for i in range(group_size):
 		groups.print_scores(i)
 
