@@ -36,6 +36,9 @@ try:
 	dbclient = MongoClient(CONFIG.MONGO_URL)
 	db = dbclient.classdata
 	collection = db.accounts
+
+	app.logger.debug(collection)
+
 except:
 	print("Failure to open database. Is the Mongo server running? Correct Password?")
 	sys.exit(1)
@@ -167,10 +170,6 @@ def create_account():
 		return redirect("/signup")
 	
 	print("Account check initiated...")
-	print(email)
-	print(collection.find({"type": "account"}))
-	print("Test passed")
-
 	if collection.find_one({"user": email}) is not None:
 		flash("Account already created!")
 		return redirect("/login")
