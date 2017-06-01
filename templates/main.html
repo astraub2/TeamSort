@@ -50,7 +50,9 @@
       <div class="navbuttons">
         <ul>
           <li class="menuitems" onclick="document.location='/update'">Edit</li>
-          <li class="menuitems" onclick="document.location='/manage'">Manage</li>
+		  {% if session.role is "admin" %}
+			  <li class="menuitems" onclick="document.location='/manage'">Manage</li>
+		  {% endif %}
         </ul>
       </div>
     </div>

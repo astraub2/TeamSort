@@ -8,6 +8,10 @@ Team Builder by the Hopper student development team for CIS 422: Software Engine
 * Amber Straub
 
 ## Setup
+Configure program:
+* Copy and rename `CONFIG.base.py` to `CONFIG.py`
+* Enter valid login information for database access
+
 Install the necessary modules (if needed):
 ```
 pip install -r requirements.txt

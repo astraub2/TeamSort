@@ -28,48 +28,55 @@
 
 </head>
 <body>
-    
-  <!-- Flashed messages before content -->
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <ul class="flashesList">
-            {% for message in messages %}
-            <li class=flashes>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-    {% endwith %}
-  <!-- Primary Page Layout
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-<div class ="splashBackground"> 
-  <div class="container">
-    <div class="row">
-      <div class="one-third column" style="margin-top:30.6666666667%; margin-bottom:auto">
-        <h4>Welcome to</h4>
-        <h3>Hopper Team Builder!</h3>
-        <hr>
-        <h6>Made for CIS 422: Software Methodology</h6>
-        <form action="/signup" style="display:inline-block; margin-top:1rem; margin-right:10%; width:45%">
-            <button class="button" id="signup">Sign Up</button>
-        </form><form action="/login" style="display:inline-block; width:45%">
-            <button class="button-primary" id="login" type="submit">Login</button>
-        </form>
+	
+	<!-- Primary Page Layout
+	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	<div class ="splashBackground">
+	<div class="container">
+		<!-- Flashed messages before content -->
+		{% with messages = get_flashed_messages() %}
+		{% if messages %}
+		<ul class="flashesList">
+			{% for message in messages %}
+				<li class=flashes>{{ message }}</li>
+			{% endfor %}
+		</ul>
+		{% endif %}
+		{% endwith %}
+	
+		<div class="row">
+			<div class="one-third column" style="margin-top:30.6666666667%; margin-bottom:auto">
+			<h4>Welcome to</h4>
+			<h3>Hopper Team Builder!</h3>
+			<hr>
+			<h6>Made for CIS 422: Software Methodology</h6>
+			
+			<form action="/signup" style="display:inline-block; margin-top:1rem; margin-right:10%; width:45%">
+				<button class="button" id="signup">Sign Up</button>
+			</form>
+			
+			<form action="/login" style="display:inline-block; width:45%">
+				<button class="button-primary" id="login" type="submit">Login</button>
+			</form>
       </div>
       <div class="offset-by-one-third one-third column" style="margin-top:22%;; margin-bottom:auto; float:right">
-        <h4 align="right">Members of Hopper</h4>
-        <hr>
-        <li>Anisha Aggarwal, Developer<br>Front-End / Documentation
-            <br>
-            <a href="mailto:anishaa@uoregon.edu?">anishaa@uoregon.edu</a></li>
-		<li>Vinitha Gadiraju, Developer<br>Back-End
-			<br>
-			<a href="mailto:vinithag@uoregon.edu?">vinithag@uoregon.edu</a></li>
-		<li>Jared Smith, Developer<br>Front-End / Service
-			<br>
-			<a href="mailto:jsmith22@uoregon.edu?">jsmith22@uoregon.edu</a></li>
-		<li>Amber Straub, Manager<br>Back-End / Service
-			<br>
-			<a href="mailto:astraub2@uoregon.edu?">astraub2@uoregon.edu</a></li>
+			<h4 align="right">Members of Hopper</h4>
+			<hr>
+			<li>Anisha Aggarwal, Developer
+			<br>Front-End / Documentation
+            <br><a href="mailto:anishaa@uoregon.edu?">anishaa@uoregon.edu</a></li>
+			
+			<li>Vinitha Gadiraju, Developer
+			<br>Back-End / Documentation
+			<br><a href="mailto:vinithag@uoregon.edu?">vinithag@uoregon.edu</a></li>
+			
+			<li>Jared Smith, Developer
+			<br>Front-End / Service
+			<br><a href="mailto:jsmith22@uoregon.edu?">jsmith22@uoregon.edu</a></li>
+			
+			<li>Amber Straub, Manager
+			<br>Back-End / Service
+			<br><a href="mailto:astraub2@uoregon.edu?">astraub2@uoregon.edu</a></li>
       </div>
     </div>
   </div>

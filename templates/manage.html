@@ -109,14 +109,18 @@
 							  </thead>
 							  <tbody>
 								  {% for account in session.accounts %}
-									  <tr>
-										  <td>
-											  <input type="checkbox" name="selected" value="{{account._id}}"></td>
-										  <td>{{ account.login.first }}</td>
-										  <td>{{ account.login.last }}</td>
-										  <td>{{ account.user }}</td>
-										  <td>{{ account.date }}</td>
-									  </tr>
+									  {% if account.user is not session.user %}
+										  <!--- {% if account.role is not "admin" %} --->
+											  <tr>
+											      <td>
+													  <input type="checkbox" name="selected" value="{{account._id}}"></td>
+												  <td>{{ account.login.first }}</td>
+												  <td>{{ account.login.last }}</td>
+												  <td>{{ account.user }}</td>
+												  <td>{{ account.date }}</td>
+											  </tr>
+										  <!--- {% endif %} --->
+									  {% endif %}
 								  {% endfor %}
 							  </tbody>
 						  </table>
