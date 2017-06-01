@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Sign Up: Experience</title>
+  <meta name="description" content="Experience Page">
+  <meta name="author" content="Jared Smith">
+		
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+			
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+				
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="static/css/normalize.css">
+  <link rel="stylesheet" href="static/css/skeleton.css">
+			
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+	  
+</head>
+<body>
+	
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="expBackground">
+	  <div class="container">
+		  <!-- Flashed messages before content -->
+		  {% with messages = get_flashed_messages() %}
+		  {% if messages %}
+		  <ul class="flashesList">
+			  {% for message in messages %}
+				  <li class=flashes>{{ message }}</li>
+			  {% endfor %}
+		  </ul>
+		  {% endif %}
+		  {% endwith %}
+				
+		  <div class="row">
+			  <div class="column" style="margin-top: 5%">
+				  <h3>Please enter your relevant experience.</h3>
+				  <hr>
+				  <form method="POST" action="_exp" style="margin: 5% 5% auto 5%; overflow:auto">
+					  <div class="signup column">
+						  <table id="lang" class="u-full-width">
+							  <thead>
+								  <tr>
+									  <th>Language</th><th>Proficiency
+														<p>5 - Best</p></th>
+								  </tr>
+							  </thead>
+							  <tr>
+								  <th>Java</th>
+								  <td>
+									  <select class="u-full-width" name="java">
+										  <option value="">None</option>
+										  <option value="1">1</option>
+										  <option value="2">2</option>
+										  <option value="3">3</option>
+										  <option value="4">4</option>
+										  <option value="5">5</option>
+									  </select>
+								  </td>
+							  </tr>
+							  <tr>
+								  <th>C/C++</th>
+								  <td>
+									  <select class="u-full-width" name="c">
+										  <option value="">None</option>
+										  <option value="1">1</option>
+										  <option value="2">2</option>
+										  <option value="3">3</option>
+										  <option value="4">4</option>
+										  <option value="5">5</option>
+									  </select>
+								  </td>
+							  </tr>
+							  <tr>
+								  <th>Python</th>
+								  <td>
+									  <select class="u-full-width" name="python">
+										  <option value="">None</option>
+										  <option value="1">1</option>
+										  <option value="2">2</option>
+										  <option value="3">3</option>
+										  <option value="4">4</option>
+										  <option value="5">5</option>
+									  </select>
+								  </td>
+							  </tr>
+							  <tr>
+								  <th>Swift</th>
+								  <td>
+									  <select class="u-full-width" name="swift">
+										  <option value="">None</option>
+										  <option value="1">1</option>
+										  <option value="2">2</option>
+										  <option value="3">3</option>
+										  <option value="4">4</option>
+										  <option value="5">5</option>
+									  </select>
+								  </td>
+							  </tr>
+							  <tr>
+								  <th>PHP</th>
+								  <td>
+									  <select class="u-full-width" name="php">
+										  <option value="">None</option>
+										  <option value="1">1</option>
+										  <option value="2">2</option>
+										  <option value="3">3</option>
+										  <option value="4">4</option>
+										  <option value="5">5</option>
+									  </select>
+								  </td>
+							  </tr>
+							  <tr>
+								  <th>Javascript</th>
+								  <td>
+									  <select class="u-full-width" name="javascript">
+										  <option value="">None</option>
+										  <option value="1">1</option>
+										  <option value="2">2</option>
+										  <option value="3">3</option>
+										  <option value="4">4</option>
+										  <option value="5">5</option>
+									  </select>
+								  </td>
+							  </tr>
+							  <tr>
+								  <th>Other<p>(Specify)</p></th>
+								  <td>
+									  <input class="u-full-width" type="text" placeholder="Other" name="specified">
+									  <select class="u-full-width" name="other">
+										  <option value="">None</option>
+										  <option value="1">1</option>
+										  <option value="2">2</option>
+										  <option value="3">3</option>
+										  <option value="4">4</option>
+										  <option value="5">5</option>
+									  </select>
+								  </td>
+							  </tr>
+
+						  </table>
+					  </div>
+					  <div class="signup column">
+						  <table id="major" class="u-full-width">
+							  <thead>
+								  <tr>
+									  <th style="background-color:transparent;border:none;
+										  height: 42px;width:62.5%">
+									  </th>
+									  <th style="width:12.5%">Weak</th>
+									  <th style="width:12.5%">N/A</th>
+									  <th style="width:12.5%">Strong</th>
+								  </tr>
+							  </thead>
+							  <tr>
+								  <th><a href="http://classes.cs.uoregon.edu/index.php?course=cis313">CIS 313:</a><p>Data Structures</p></th>
+								  <td><input type="radio" name="313" value="weak"></td>
+								  <td><input type="radio" name="313" value="" checked></td>
+								  <td><input type="radio" name="313" value="str"></td>
+							  </tr>
+							  <tr>
+								  <th><a href="http://classes.cs.uoregon.edu/index.php?course=cis314">CIS 314:</a>
+									  <p>Computer Org.</p></th>
+								  <td><input type="radio" name="314" value="weak"></td>
+								  <td><input type="radio" name="314" value="" checked></td>
+								  <td><input type="radio" name="314" value="str"></td>
+							  </tr>
+							  <tr>
+								  <th><a href="http://classes.cs.uoregon.edu/index.php?course=cis315">CIS 315:</a>
+									  <p>Algorithms</p></th>
+								  <td><input type="radio" name="315" value="weak"></td>
+								  <td><input type="radio" name="315" value="" checked></td>
+								  <td><input type="radio" name="315" value="str"></td>
+							  </tr>
+							  <tr>
+								  <th><a href="http://classes.cs.uoregon.edu/index.php?course=cis322">CIS 322:</a>
+									  <p>Software Eng.</p></th>
+								  <td><input type="radio" name="322" value="weak"></td>
+								  <td><input type="radio" name="322" value="" checked></td>
+								  <td><input type="radio" name="322" value="str"></td>
+							  </tr>
+							  <tr>
+								  <th><a href="http://classes.cs.uoregon.edu/index.php?course=cis330">CIS 330:</a>
+									  <p>C/C++ and Unix</p></th>
+								  <td><input type="radio" name="330" value="weak"></td>
+								  <td><input type="radio" name="330" value="" checked></td>
+								  <td><input type="radio" name="330" value="str"></td>
+							  </tr>
+							  <tr>
+								  <th><a href="http://classes.cs.uoregon.edu/index.php?course=cis415">CIS 415:</a>
+									  <p>Operating Systems</p></th>
+								  <td><input type="radio" name="415" value="weak"></td>
+								  <td><input type="radio" name="415" value="" checked></td>
+								  <td><input type="radio" name="415" value="str"></td>
+							  </tr>
+							  <tr>
+								  <th><a href="http://classes.cs.uoregon.edu/index.php?course=cis425">CIS 425:</a>
+									  <p>Prog. Languages</p></th>
+								  <td><input type="radio" name="425" value="weak"></td>
+								  <td><input type="radio" name="425" value="" checked></td>
+								  <td><input type="radio" name="425" value="str"></td>
+							  </tr>
+						  </table>
+						  <br>
+						  <label for="TeamPrefInput">Teammate Preference:</label><input class="u-full-width" type="text" placeholder="i.e. Jane Doe, John Smith" id="TeamPrefInput" name="TeamPrefInput">
+							  
+						  <input type="button" id="half-left" onclick="document.location='/avail'" value="Back"/>
+						  <input class="button-primary" id="half-right" type="submit" value="Sign Up">
+					  </div>
+				  </form>
+			  </div>
+		  </div>
+	  </div>
+  </div>
+  <!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		
+</body>
+</html>
+

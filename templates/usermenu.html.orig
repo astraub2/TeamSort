@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Update Info</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="static/css/normalize.css">
+  <link rel="stylesheet" href="static/css/skeleton.css">
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<div class="container">
+    <div class="row">
+		<div class="one-half" style="margin-top: 5%">
+			<h4>Hi, {{ session.first }}!</h4>
+        	<p>This is your personal profile page. Edit your information below and let people know when you have time to meet up!</p>
+		</div>
+	</div>
+    <div class="row">
+      <div class="one-half" style="margin-top: 5%">
+<!-- Edit Image Part -->
+        <div class="imageBox"><div class="changeImage"><div class="userImage"></div><input class="imageButton" type="submit" value="Change Image"></div></div>
+        <div class="userinfo">
+
+<!-- Edit Availability Part -->
+<form action="_update" method="POST">
+
+  <div class="editInfo">
+    <div class="six columns">
+    <label for="editfirstname">Availability</label>   
+    
+    <label class="weekdays-list">    
+    <input type="checkbox" name="mon" value="M ">
+    <span class="label-body">Mo</span></label>
+
+    <label class="weekdays-list"> 
+    <input type="checkbox" name="tue" value="T "> 
+    <span class="label-body">Tu</span></label>
+
+    <label class="weekdays-list"> 
+    <input type="checkbox" name="wed" value="W ">
+    <span class="label-body">We</span></label>
+
+    <label class="weekdays-list"> 
+    <input type="checkbox" name="thu" value="Th ">
+    <span class="label-body">Th</span></label>
+
+    <label class="weekdays-list"> 
+    <input type="checkbox" name="fri" value="Fr ">
+    <span class="label-body">Fr</span></label>
+
+    <label class="weekdays-list"> 
+    <input type="checkbox" name="sat" value="Sa ">
+    <span class="label-body">Sa</span></label>
+
+    <label class="weekdays-list"> 
+    <input type="checkbox" name="sun" value="Su">
+    <span class="label-body">Su</span></label>
+
+    </div>
+
+<!-- Edit Test Input Info Part -->
+    <div class="six columns">
+      <label for="editfirstname">Change First Name</label>
+      <input class="u-full-width" type="text" name="first" placeholder="{{session.first}}" id="editfirstname">
+    </div>
+    
+    <div class="six columns">
+      <label for="editlastname">Change Last Name</label>
+      <input class="u-full-width" type="text" name="last" placeholder="{{session.last}}" id="editlastname">
+    </div>
+    
+    <div class="six columns">
+      <label for="editmajor">Change Major</label>
+      <input class="u-full-width" type="text" name="major" placeholder="{{session.major}}" id="editmajor">
+    </div>
+
+    <div class="six columns">
+      <label for="exampleEmailInput">Your email</label>
+      <input class="u-full-width" type="email" name="email" placeholder="{{session.email}}" id="exampleEmailInput">
+    </div>
+
+    <div class="six columns">
+      <label for="editphone">Change phone </label>
+      <input class="u-full-width" type="text" name="phone" placeholder="{{session.phone}}" id="editphone">
+    </div>
+
+    <div class="six columns">
+      <label for="editquote">Quote</label>
+      <textarea class="u-full-width"  name="quote" placeholder="{{session.quote}}" id="editquote"></textarea>
+    </div>
+    
+    <div class="six columns">
+      <input class="button-primary" type="submit" value="Submit">
+    <div class="six columns">
+  
+  </div>
+</form>
+</div>
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>

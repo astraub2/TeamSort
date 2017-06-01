@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Sign-Up: Availability</title>
+  <meta name="description" content="Availability Page">
+  <meta name="author" content="Jared Smith">
+                    
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+                        
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+                            
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="static/css/normalize.css">
+  <link rel="stylesheet" href="static/css/skeleton.css">
+                                    
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+	  
+</head>
+<body>
+	
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class ="availBackground">
+	  <div class="container">
+		  <!-- Flashed messages before content -->
+		  {% with messages = get_flashed_messages() %}
+		  {% if messages %}
+		  <ul class="flashesList">
+			  {% for message in messages %}
+				  <li class=flashes>{{ message }}</li>
+			  {% endfor %}
+		  </ul>
+		  {% endif %}
+		  {% endwith %}
+			
+		  <div class="row">
+			  <div class="column" style="margin-top: 2.5%">
+				  <h3>Please enter your current availability.</h3>
+				  <hr>
+				  <form method="POST" action="_avail" style="margin: 5% 5% auto 5%; overflow:auto">
+					  <div class="signup column">
+						  <table id="am">
+							  <tr style="background-color:transparent">
+								  <th style="background-color:transparent;border:none"></th>
+								  <th>Mo</th> <th>Tu</th> <th>We</th> <th>Th</th> <th>Fr</th>
+							  </tr>
+							  <tr>
+								  <th>8:00am</th>
+								  <td><input type="checkbox" name="mo" value="8"></td>
+								  <td><input type="checkbox" name="tu" value="8"></td>
+								  <td><input type="checkbox" name="we" value="8"></td>
+								  <td><input type="checkbox" name="th" value="8"></td>
+								  <td><input type="checkbox" name="fr" value="8"></td>
+							  </tr>
+							  <tr>
+								  <th>:30</th>
+								  <td><input type="checkbox" name="mo" value="8:30"></td>
+								  <td><input type="checkbox" name="tu" value="8:30"></td>
+								  <td><input type="checkbox" name="we" value="8:30"></td>
+								  <td><input type="checkbox" name="th" value="8:30"></td>
+								  <td><input type="checkbox" name="fr" value="8:30"></td>
+							  </tr>
+							  <tr>
+								  <th>9:00am</th>
+								  <td><input type="checkbox" name="mo" value="9"></td>
+								  <td><input type="checkbox" name="tu" value="9"></td>
+								  <td><input type="checkbox" name="we" value="9"></td>
+								  <td><input type="checkbox" name="th" value="9"></td>
+								  <td><input type="checkbox" name="fr" value="9"></td>
+							  </tr>
+							  <tr>
+								  <th>:30</th>
+								  <td><input type="checkbox" name="mo" value="9:30"></td>
+								  <td><input type="checkbox" name="tu" value="9:30"></td>
+								  <td><input type="checkbox" name="we" value="9:30"></td>
+								  <td><input type="checkbox" name="th" value="9:30"></td>
+								  <td><input type="checkbox" name="fr" value="9:30"></td>
+							  </tr>
+							  <tr>
+								  <th>10:00am</th>
+								  <td><input type="checkbox" name="mo" value="10"></td>
+								  <td><input type="checkbox" name="tu" value="10"></td>
+								  <td><input type="checkbox" name="we" value="10"></td>
+								  <td><input type="checkbox" name="th" value="10"></td>
+								  <td><input type="checkbox" name="fr" value="10"></td>
+							  </tr>
+							  <tr>
+								  <th>:30</th>
+								  <td><input type="checkbox" name="mo" value="10:30"></td>
+								  <td><input type="checkbox" name="tu" value="10:30"></td>
+								  <td><input type="checkbox" name="we" value="10:30"></td>
+								  <td><input type="checkbox" name="th" value="10:30"></td>
+								  <td><input type="checkbox" name="fr" value="10:30"></td>
+							  </tr>
+							  <tr>
+								  <th>11:00am</th>
+								  <td><input type="checkbox" name="mo" value="11"></td>
+								  <td><input type="checkbox" name="tu" value="11"></td>
+								  <td><input type="checkbox" name="we" value="11"></td>
+								  <td><input type="checkbox" name="th" value="11"></td>
+								  <td><input type="checkbox" name="fr" value="11"></td>
+							  </tr>
+							  <tr>
+								  <th>:30</th>
+								  <td><input type="checkbox" name="mo" value="11:30"></td>
+								  <td><input type="checkbox" name="tu" value="11:30"></td>
+								  <td><input type="checkbox" name="we" value="11:30"></td>
+								  <td><input type="checkbox" name="th" value="11:30"></td>
+								  <td><input type="checkbox" name="fr" value="11:30"></td>
+							  </tr>
+							  <tr>
+								  <th style="background-color: #00483C;">12:00pm</th>
+								  <td><input type="checkbox" name="mo" value="12"></td>
+								  <td><input type="checkbox" name="tu" value="12"></td>
+								  <td><input type="checkbox" name="we" value="12"></td>
+								  <td><input type="checkbox" name="th" value="12"></td>
+								  <td><input type="checkbox" name="fr" value="12"></td>
+							  </tr>
+							  <tr>
+								  <th style="background-color: #00483C;">:30</th>
+								  <td><input type="checkbox" name="mo" value="12:30"></td>
+								  <td><input type="checkbox" name="tu" value="12:30"></td>
+								  <td><input type="checkbox" name="we" value="12:30"></td>
+								  <td><input type="checkbox" name="th" value="12:30"></td>
+								  <td><input type="checkbox" name="fr" value="12:30"></td>
+							  </tr>
+							  <tr>
+								  <th style="background-color: #00483C;">1:00pm</th>
+								  <td><input type="checkbox" name="mo" value="13"></td>
+								  <td><input type="checkbox" name="tu" value="13"></td>
+								  <td><input type="checkbox" name="we" value="13"></td>
+								  <td><input type="checkbox" name="th" value="13"></td>
+								  <td><input type="checkbox" name="fr" value="13"></td>
+							  </tr>
+							  <tr>
+								  <th style="background-color: #00483C;">:30</th>
+								  <td><input type="checkbox" name="mo" value="13:30"></td>
+								  <td><input type="checkbox" name="tu" value="13:30"></td>
+								  <td><input type="checkbox" name="we" value="13:30"></td>
+								  <td><input type="checkbox" name="th" value="13:30"></td>
+								  <td><input type="checkbox" name="fr" value="13:30"></td>
+							  </tr>
+						  </table>
+					  </div>
+					  <div class="signup column">
+						  <table id="pm">
+							  <tr style="background-color:transparent">
+								  <th style="background-color:transparent;border:none"></th>
+								  <th>Mo</th> <th>Tu</th> <th>We</th> <th>Th</th> <th>Fr</th>
+							  </tr>
+							  <tr>
+								  <th>2:00pm</th>
+								  <td><input type="checkbox" name="mo" value="14"></td>
+								  <td><input type="checkbox" name="tu" value="14"></td>
+								  <td><input type="checkbox" name="we" value="14"></td>
+								  <td><input type="checkbox" name="th" value="14"></td>
+								  <td><input type="checkbox" name="fr" value="14"></td>
+							  </tr>
+							  <tr>
+								  <th>:30</th>
+								  <td><input type="checkbox" name="mo" value="14:30"></td>
+								  <td><input type="checkbox" name="tu" value="14:30"></td>
+								  <td><input type="checkbox" name="we" value="14:30"></td>
+								  <td><input type="checkbox" name="th" value="14:30"></td>
+								  <td><input type="checkbox" name="fr" value="14:30"></td>
+							  </tr>
+							  <tr>
+								  <th>3:00pm</th>
+								  <td><input type="checkbox" name="mo" value="15"></td>
+								  <td><input type="checkbox" name="tu" value="15"></td>
+								  <td><input type="checkbox" name="we" value="15"></td>
+								  <td><input type="checkbox" name="th" value="15"></td>
+								  <td><input type="checkbox" name="fr" value="15"></td>
+							  </tr>
+							  <tr>
+								  <th>:30</th>
+								  <td><input type="checkbox" name="mo" value="15:30"></td>
+								  <td><input type="checkbox" name="tu" value="15:30"></td>
+								  <td><input type="checkbox" name="we" value="15:30"></td>
+								  <td><input type="checkbox" name="th" value="15:30"></td>
+								  <td><input type="checkbox" name="fr" value="15:30"></td>
+							  </tr>
+							  <tr>
+								  <th>4:00pm</th>
+								  <td><input type="checkbox" name="mo" value="16"></td>
+								  <td><input type="checkbox" name="tu" value="16"></td>
+								  <td><input type="checkbox" name="we" value="16"></td>
+								  <td><input type="checkbox" name="th" value="16"></td>
+								  <td><input type="checkbox" name="fr" value="16"></td>
+							  </tr>
+							  <tr>
+								  <th>:30</th>
+								  <td><input type="checkbox" name="mo" value="16:30"></td>
+								  <td><input type="checkbox" name="tu" value="16:30"></td>
+								  <td><input type="checkbox" name="we" value="16:30"></td>
+								  <td><input type="checkbox" name="th" value="16:30"></td>
+								  <td><input type="checkbox" name="fr" value="16:30"></td>
+							  </tr>
+							  <tr>
+								  <th>5:00pm</th>
+								  <td><input type="checkbox" name="mo" value="17"></td>
+								  <td><input type="checkbox" name="tu" value="17"></td>
+								  <td><input type="checkbox" name="we" value="17"></td>
+								  <td><input type="checkbox" name="th" value="17"></td>
+								  <td><input type="checkbox" name="fr" value="17"></td>
+							  </tr>
+							  <tr>
+								  <th>:30</th>
+								  <td><input type="checkbox" name="mo" value="17:30"></td>
+								  <td><input type="checkbox" name="tu" value="17:30"></td>
+								  <td><input type="checkbox" name="we" value="17:30"></td>
+								  <td><input type="checkbox" name="th" value="17:30"></td>
+								  <td><input type="checkbox" name="fr" value="17:30"></td>
+							  </tr>
+							  <tr>
+								  <th>6:00pm</th>
+								  <td><input type="checkbox" name="mo" value="18"></td>
+								  <td><input type="checkbox" name="tu" value="18"></td>
+								  <td><input type="checkbox" name="we" value="18"></td>
+								  <td><input type="checkbox" name="th" value="18"></td>
+								  <td><input type="checkbox" name="fr" value="18"></td>
+							  </tr>
+							  <tr>
+								  <th>:30</th>
+								  <td><input type="checkbox" name="mo" value="18:30"></td>
+								  <td><input type="checkbox" name="tu" value="18:30"></td>
+								  <td><input type="checkbox" name="we" value="18:30"></td>
+								  <td><input type="checkbox" name="th" value="18:30"></td>
+								  <td><input type="checkbox" name="fr" value="18:30"></td>
+							  </tr>
+						  </table>
+						  
+						  <input type="button" id="half-left" onclick="document.location='/signup'" value="Back"/>
+						  <input class="button-primary" id="half-right" type="submit" value="Next">
+					  </div>
+				  </form>
+			  </div>
+		  </div>
+	  </div>
+  </div>
+  <!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Manage</title>
+  <meta name="description" content="Admin. Management Page">
+  <meta name="author" content="Jared Smith">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="static/css/normalize.css">
+  <link rel="stylesheet" href="static/css/skeleton.css">
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="manageBackground">
+	  <div class="container">
+		  <!-- Flashed messages before content -->
+		  {% with messages = get_flashed_messages() %}
+		  {% if messages %}
+		  <ul class="flashesList">
+			  {% for message in messages %}
+				  <li class=flashes>{{ message }}</li>
+			  {% endfor %}
+		  </ul>
+		  {% endif %}
+		  {% endwith %}
+		  
+		  <script language="JavaScript">
+			  function toggle(source) {
+				  checkboxes = document.getElementsByName('selected');
+				  for(var i=0, n=checkboxes.length; i<n; i++) {
+					  checkboxes[i].checked = source.checked;
+				  }
+			  }
+		  </script>
+		  
+		  <div class="row">
+			  <div class="column" style="margin-top: 5%">
+				  <h3>Manage Accounts</h3>
+				  <hr>
+				  {% if session.accounts %}
+					  <form method=“POST” action="_manage" style="margin: 5% 5% auto 5%; overflow:auto">
+						  <table class="u-full-width">
+							  <thead>
+								  <tr>
+									  <td># of Members in Group:</td>
+									  <td>
+										  <select name="GroupSizeInput">
+											  <option value=1>1</option>
+											  <option value=2>2</option>
+											  <option value=3>3</option>
+											  <option value=4>4</option>
+											  <option value=5>5</option>
+											  <option value=6>6</option>
+											  <option value=7>7</option>
+											  <option value=8>8</option>
+										  </select>
+									  </td>
+									  <td>
+										  to
+									  </td>
+									  <td>
+										  <select name="GroupSizeRangeInput">
+											  <option value=0>Opt.</option>
+											  <option value=1>1</option>
+											  <option value=2>2</option>
+											  <option value=3>3</option>
+											  <option value=4>4</option>
+											  <option value=5>5</option>
+											  <option value=6>6</option>
+											  <option value=7>7</option>
+											  <option value=8>8</option>
+										  </select>
+									  </td>
+									  <td>
+										  <button type="submit" name="action" value="generate">Generate Selected</button>
+									  </td>
+									  <td>
+										  <button type="submit" name="action" value="delete">Delete Selected</button>
+									  </td>
+								  </tr>
+								  <tr>
+									  <th>Select all:&nbsp;
+										  <input type="checkbox" onClick="toggle(this)" /></th>
+									  <th>First Name</th>
+									  <th>Last Name</th>
+									  <th>E-mail</th>
+									  <th>Date Created</th>
+								  </tr>
+							  </thead>
+							  <tbody>
+								  {% for account in session.accounts %}
+									  <tr>
+										  <td>
+											  <input type="checkbox" name="selected" value="{{account._id}}"></td>
+										  <td>{{ account.login.first }}</td>
+										  <td>{{ account.login.last }}</td>
+										  <td>{{ account.user }}</td>
+										  <td>{{ account.date }}</td>
+									  </tr>
+								  {% endfor %}
+							  </tbody>
+						  </table>
+					  </form>
+				  {% else %}
+					  <p>No accounts available.</p>
+				  {% endif %}
+			  </div> <!-- End Column -->
+		  </div> <!-- End Row -->
+	  </div> <!-- End Container -->
+  </div>
+  <!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+</body>
+</html>
+

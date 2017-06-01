@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Sign-Up: Account Information</title>
+  <meta name="description" content="Sign-Up Page">
+  <meta name="author" content="Jared Smith">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="static/css/normalize.css">
+  <link rel="stylesheet" href="static/css/skeleton.css">
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+</head>
+<body>
+	
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="signupBackground">
+	  <div class="container">
+		  <!-- Flashed messages before content -->
+		  {% with messages = get_flashed_messages() %}
+		  {% if messages %}
+		  <ul class="flashesList">
+			  {% for message in messages %}
+				  <li class=flashes>{{ message }}</li>
+			  {% endfor %}
+		  </ul>
+		  {% endif %}
+		  {% endwith %}
+		  
+		  <div class="row">
+			  <div class="column" style="margin-left: auto; margin-right: auto; margin-top: 15%">
+				  <h3>Please enter your information.</h3>
+				  <hr>
+				  <form method="POST" action="_signup" style="margin: 5% 5% auto 5%">
+					  <!-- Left Column -->
+					  <div class="signup column">
+						  <!-- First Name Input -->
+						  <label for="RegisterFirstNameInput">First Name</label>
+						  {% if session.first %}
+						  <input class="u-full-width" type="text" value="{{ session.first }}" placeholder="First Name" id="RegisterFirstNameInput" name="RegisterFirstNameInput">
+					  
+						  {% else %}
+						  <input class="u-full-width" type="text" placeholder="First Name" id="RegisterFirstNameInput" name="RegisterFirstNameInput">
+					  
+						  {% endif %}
+			
+						  <!-- Last Name Input -->
+						  <label for="RegisterLastNameInput">Last Name</label>
+						  {% if session.last %}
+						  <input class="u-full-width" type="text" value="{{ session.last }}" placeholder="Last Name" id="RegisterLastNameInput" name="RegisterLastNameInput">
+						  
+						  {% else %}
+						  <input class="u-full-width" type="text" placeholder="Last Name" id="RegisterLastNameInput" name="RegisterLastNameInput">
+						  
+						  {% endif %}
+			
+						  <!-- Student ID Input -->
+						  <label for="RegisterIDInput">Student ID</label>
+						  {% if session.id %}
+						  <input class="u-full-width" type="text" value="{{ session.id }}" placeholder="951234567" id="RegisterIDInput" name="RegisterIDInput">
+						
+						  {% else %}
+						  <input class="u-full-width" type="text" placeholder="951234567" id="RegisterIDInput" name="RegisterIDInput">
+					
+						  {% endif %}
+					  </div>
+		
+					  <!-- Right Column -->
+					  <div class="signup column">
+						  <!-- E-mail Input -->
+						  <label for="LoginEmailInput">Your e-mail</label>
+						  {% if session.email %}
+						  <input class="u-full-width" type="email" value="{{ session.email }}" placeholder="duckid@uoregon.edu" id="RegisterEmailInput" name="RegisterEmailInput">
+						  
+						  {% else %}
+						  <input class="u-full-width" type="email" placeholder="duckid@uoregon.edu" id="RegisterEmailInput" name="RegisterEmailInput">
+						  
+						  {% endif %}
+                
+						  <label for="RegisterPasswordInput">Your password</label>
+						  <input class="u-full-width" type="password" placeholder="Password" id="RegisterPasswordInput" name="RegisterPasswordInput">
+                
+						  <label for="LoginRepeatInput">Confirm password</label>
+						  <input class="u-full-width" type="password" placeholder="Confirm password" id="LoginRepeatInput" name="LoginRepeatInput">
+                
+						  <input type="button" id="half-left" onclick="document.location='/'" value="Back"/>
+						  <input class="button-primary" id="half-right" type="submit" value="Next">
+					  </div>
+				  </form>
+			  </div>
+		  </div>
+	  </div>
+  </div>
+  <!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+</body>
+</html>
