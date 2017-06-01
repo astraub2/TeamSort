@@ -37,8 +37,6 @@ try:
 	db = dbclient.classdata
 	collection = db.accounts
 
-	app.logger.debug(collection)
-
 except:
 	print("Failure to open database. Is the Mongo server running? Correct Password?")
 	sys.exit(1)
