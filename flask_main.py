@@ -168,7 +168,7 @@ def create_account():
 	
 	print("Account check initiated...")
 	print(email)
-	print(collection.find_one({"user": email}))
+	print(collection.find({"type": "account"}))
 	print("Test passed")
 
 	if collection.find_one({"user": email}) is not None:
