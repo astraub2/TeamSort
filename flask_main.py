@@ -167,6 +167,10 @@ def create_account():
 		return redirect("/signup")
 	
 	print("Account check initiated...")
+	print(email)
+	print(collection.find_one({"user": email}))
+	print("Test passed")
+
 	if collection.find_one({"user": email}) is not None:
 		flash("Account already created!")
 		return redirect("/login")
