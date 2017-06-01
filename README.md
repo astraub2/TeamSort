@@ -1,10 +1,11 @@
-# Moonshot
-Team Builder by the Moonshot student development team for CIS 422: Software Engineering at the University of Oregon
+# Hopper
+Team Builder by the Hopper student development team for CIS 422: Software Engineering at the University of Oregon
 
 #### Team Members
+* Anisha Aggarwal
+* Vinitha Gadiraju
 * Jared Smith
-* Tyler Quatraro
-* Yuan Wang
+* Amber Straub
 
 ## Setup
 Install the necessary modules (if needed):
