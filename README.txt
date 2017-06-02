@@ -56,6 +56,8 @@ Finally, if a teammate is placed in a group with someone they preferred, the sco
 
 First, the program randomly assigns students to a team. Then the teams will be shuffled 1000 times with the intent of maximizing team scores to create higher compatibility. After maximizing, the algorithm will output what the new teams are.
 
+Currently the algorithm is set up to allow the admin to deicde which crition they would like to prioritize. However we do not have ability to do so from our webapp.
+
 ---------------------------------------------------------------------
 ---------------------------------------------------------------------
 User Guide:
