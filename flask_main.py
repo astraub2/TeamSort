@@ -533,7 +533,85 @@ def generateUserData():
 
 	#print (accounts)
 	return data
+def regenerateUserData(newemailarray):
+	groupcount=4
+	accounts=get_accounts()
+	experiencearray=[]
+	bexperiencearray=[]
+	emailarray=[]
+	availarray=[]
+	for i in accounts:
+		email=i['user']
+		if email in newemailarray:
+			availability=i['avail']
 
+			experience=i['exp']['pro']
+			
+			myexperience=[]
+			
+			bmyexperience=[]
+			##########
+			#Grab usernames
+			###########
+			emailarray.append(email)
+
+			#############
+			#Grab experiences
+			############
+			for i in experience:
+				lan=i[0]
+				lev=i[1]
+				if int(lev)>3:
+					myexperience.append(lan)
+					#print(lan)
+				else:
+					bmyexperience.append(lan)
+
+			experiencearray.append(myexperience)
+			bexperiencearray.append(bmyexperience)
+			
+
+			#############
+			#Grab avaibility
+			############
+			#print(availability)
+			DAYS=['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+			count=0
+			myavail=[]
+			for i in availability:
+				#print(i)
+				if i in DAYS:
+					timesonday=availability[DAYS[count]]
+					#print(availability[DAYS[count]])
+
+					for j in timesonday:
+						#print(i+" " +j)
+						myavail.append(i+" " +j)
+				count+=1
+			availarray.append(myavail)
+		# print ("\n\n")
+		# print(i['user'])
+		# print(i['exp']['pro'])
+		# print(i['avail'])
+	# print(emailarray)
+	# print(experiencearray)
+	# print(bexperiencearray)
+	# print(availarray)
+	users=[]
+	count=0
+	for i in emailarray:
+		users.append([emailarray[count], availarray[count], experiencearray[count], bexperiencearray[count]])
+	print(emailarray)
+
+	data={"group_count" : groupcount,
+	"schedule_list" : ['Wednesday 8', 'Wednesday 8:30', 'Wednesday 9', 'Wednesday 9:30', 'Wednesday 10', 'Wednesday 10:30', 'Wednesday 11', 'Wednesday 11:30', 'Wednesday 12', 'Wednesday 12:30', 'Wednesday 13', 'Wednesday 13:30', 'Wednesday 14', 'Wednesday 14:30', 'Wednesday 15', 'Wednesday 15:30', 'Wednesday 16', 'Wednesday 16:30', 'Wednesday 17', 'Wednesday 17:30', 'Wednesday 18', 'Wednesday 18:30', 'Tuesday 8', 'Tuesday 8:30', 'Tuesday 9', 'Tuesday 9:30', 'Tuesday 10', 'Tuesday 10:30', 'Tuesday 11', 'Tuesday 11:30', 'Tuesday 12', 'Tuesday 12:30', 'Tuesday 13', 'Tuesday 13:30', 'Tuesday 14', 'Tuesday 14:30', 'Tuesday 15', 'Tuesday 15:30', 'Tuesday 16', 'Tuesday 16:30', 'Tuesday 17', 'Tuesday 17:30', 'Tuesday 18', 'Tuesday 18:30', 'Friday 8', 'Friday 8:30', 'Friday 9', 'Friday 9:30', 'Friday 10', 'Friday 10:30', 'Friday 11', 'Friday 11:30', 'Friday 12', 'Friday 12:30', 'Friday 13', 'Friday 13:30', 'Friday 14', 'Friday 14:30', 'Friday 15', 'Friday 15:30', 'Friday 16', 'Friday 16:30', 'Friday 17', 'Friday 17:30', 'Friday 18', 'Friday 18:30', 'Monday 8', 'Monday 8:30', 'Monday 9', 'Monday 9:30', 'Monday 10', 'Monday 10:30', 'Monday 11', 'Monday 11:30', 'Monday 12', 'Monday 12:30', 'Monday 13', 'Monday 13:30', 'Monday 14', 'Monday 14:30', 'Monday 15', 'Monday 15:30', 'Monday 16', 'Monday 16:30', 'Monday 17', 'Monday 17:30', 'Monday 18', 'Monday 18:30', 'Thursday 8', 'Thursday 8:30', 'Thursday 9', 'Thursday 9:30', 'Thursday 10', 'Thursday 10:30', 'Thursday 11', 'Thursday 11:30', 'Thursday 12', 'Thursday 12:30', 'Thursday 13', 'Thursday 13:30', 'Thursday 14', 'Thursday 14:30', 'Thursday 15', 'Thursday 15:30', 'Thursday 16', 'Thursday 16:30', 'Thursday 17', 'Thursday 17:30', 'Thursday 18', 'Thursday 18:30'],
+	"skill_list" :['java', 'python', 'swift', 'php', 'c', 'javascript'],
+	"users" : users, 
+	"current_index" : 0,
+	"priority" : [2,1,1]}
+
+	#print (accounts)
+	return data
 
 
 
