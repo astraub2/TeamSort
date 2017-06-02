@@ -106,7 +106,6 @@ class Groups:
 
 		# Fetch the number of users and number of groups
 		N = db.get_user_count()
-		# G = db.get_group_count()
 		G = self.groupcount
 		db.set_group_count(G)
 
@@ -195,6 +194,14 @@ class Groups:
 			return None 
 
 	def run_simulation(self, arr_group):
+		"""
+		arr_group is an array of the groups that need to be run.
+		By default, this includes all groups. However, if the user only wants re-run specific groups, arr-group will be changed.
+		For example, if I have 5 groups, arr_group will look like this: 
+		[0,1,2,3,4] 
+		Let's say I don't like how the first 3 groups were sorted and I want to re-run them. The user will select these groups in the UI and arr_group will be changed to:
+		[0,1,2]
+		"""
 		for i in range(5000):
 			rg1 = self.get_group(random.choice(arr_group))
 			rg2 = self.get_group(random.choice(arr_group))
@@ -220,8 +227,15 @@ class Groups:
 
 
 def main():
-	#pdb.set_trace()
+	random.seed(int(time.time()))
+	#n = int(input("Enter the number of groups: ")) #WE NEED TO GET n FROM THE DATABASE 
+	groups = Groups(n)
+	group_size = groups.get_size()
+	groups.run_simulation(arr_group)
 
+#DEBUG CODE FOR TEST DATA 
+#pdb.set_trace()
+"""
 	random.seed(int(time.time()))
 	n = int(input("Enter the number of groups: "))
 	groups = Groups(n)
@@ -252,6 +266,6 @@ def main():
 	print("==== Groups after changing priority (sched to teammate) ====")
 	for i in range(group_size):
 		groups.print_groups_scores(i)
-
+"""
 if __name__ == '__main__':
 	main()
