@@ -54,9 +54,9 @@ Sorting Algorithm:
 The more well suited a team is for each other, the higher “score” they have. Specifically, the more available times to meet among students in a team, results in a higher score. (ie. If a teammate’s strengths match another teammate’s weaknesses, the score is higher.)
 Finally, if a teammate is placed in a group with someone they preferred, the score of the team is higher. 
 
-First, the program randomly assigns students to a team. Then the teams will be shuffled 1000 times with the intent of maximizing team scores to create higher compatibility. After maximizing, the algorithm will output what the new teams are.
+First, the program randomly assigns students to a team. Then the teams will be shuffled 1000 times with the intent of maximizing team scores to create higher compatibility. After maximizing, the algorithm will output what the new teams are. If the admin would like to regenerate the teams for any reason, they have the ability to do so. 
 
-Currently the algorithm is set up to allow the admin to deicde which crition they would like to prioritize. However we do not have ability to do so from our webapp.
+Currently the algorithm is set up to allow the admin to deicde which crition they would like to prioritize. However we do not have ability to do so from our webapp. This must be done from within the algorithm and there are instructions provided for that in the comments.
 
 ---------------------------------------------------------------------
 ---------------------------------------------------------------------
@@ -75,7 +75,7 @@ It is important that you:
 --name the file "userdata.csv"
 
 *******
-If you would like to test TeamSort without generating data, good news!!! We have a userdata.csv already generated for you.
+If you would like to test TeamSort without generating data, good news!!! We have TestData. It can be ran from the command line using: make testdata
 
 *******
 
