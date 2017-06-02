@@ -5,152 +5,12 @@
 
 import random
 import time
-import pprint
 import pdb
 import copy
-import psycopg2
 import json
 
 # Using static data.  Set this to false to use data from database
 TEST_DATA = True
-
-def getnames():
-	conn = psycopg2.connect(dbname='teamsort')
-	cur = conn.cursor()
-	cur.execute('SELECT username FROM users;')
-	#Lets grab all of the usernames for the database:
-	usernames=[]
-
-	try:
-	    result = cur.fetchall()
-	except ProgrammingError:
-	    result = None
-	if result == None:
-	    print("nothing")
-	else:
-	    for i in result:
-	        usernames.append(i[0])
-	#print (usernames)
-	return usernames
-def gettimes():
-	conn = psycopg2.connect(dbname='teamsort')
-	cur = conn.cursor()
-	cur.execute('SELECT * FROM times;')
-	#Lets grab all of the usernames for the database:
-	times=[]
-
-	try:
-	    result = cur.fetchall()
-	except ProgrammingError:
-	    result = None
-	if result == None:
-	    print("nothing")
-	else:
-		theres=[]
-		res=[]
-		for i in result:
-			for l in i:
-				if l != None:
-					try:
-						l = int(l)
-						if l<100:
-							res.append(l)
-					except ValueError:
-						continue
-					
-			theres.append(res)
-			res=[]
-	#print(theres)
-	return theres
-
-def getstrengths():
-	wordlan=['JAVA', 'CPP', 'SQL', 'HTML', 'PHP', 'Javascript', 'Bash', 'Git', 'Mongo', 'WSS', 'GIS', 'Python', 'PMO']
-	conn = psycopg2.connect(dbname='teamsort')
-	cur = conn.cursor()
-	cur.execute('SELECT * FROM languages;')
-	try:
-	    result = cur.fetchall()
-	except ProgrammingError:
-	    result = None
-	if result == None:
-	    print("nothing")
-	else:
-		strengths=[]
-		weaknesses=[]
-		allstreng=[]
-		allweak=[]
-		for i in result:
-			count=0
-			for l in i:
-				#print(l)
-				if l != None:
-					if isinstance(l, str):
-						pass
-					else:
-						if l<100:
-							strengths.append(wordlan[l])
-							count=count+1
-						else:
-							weaknesses.append(wordlan[count])
-							count=count+1
-
-			allstreng.append(strengths)
-			allweak.append(weaknesses)
-			weaknesses=[]
-			strengths=[]
-	#print(allstreng)
-	#print(allweak)
-	return allstreng, allweak
-def getpreferance():
-	conn = psycopg2.connect(dbname='teamsort')
-	cur = conn.cursor()
-	cur.execute('SELECT * FROM users;')
-	pref = []
-	try:
-	    result = cur.fetchall()
-	except ProgrammingError:
-	    result = None
-	if result == None:
-	    print("nothing")
-	else:
-		for i in result:
-			pref.append([i[3]])
-
-		#print(pref)
-
-	return pref
-
-def generateUserData(groupcount):
-	usernames=getnames()
-	times=gettimes()
-	allstrengths, allweaknesses=getstrengths()
-	pref=getpreferance()
-	userdata=[]
-	i=0
-	for j in usernames:
-		buildinstance=[]
-		buildinstance.append(usernames[i])
-		buildinstance.append(times[i])
-		buildinstance.append(allstrengths[i])
-		buildinstance.append(allweaknesses[i])
-		buildinstance.append(pref[i])
-		userdata.append(buildinstance)
-		i+=1
-	data={"group_count" : groupcount,
-	"schedule_list" : ["Monday 8 AM to 10 AM", "Monday 10 AM to 12 PM", "Monday 12PM to 2 PM", "Monday 2 PM to 4 PM", "Monday 4 PM to 6 PM",
-                        "Tuesday 8 AM to 10 AM", "Tuesday 10 AM to 12 PM", "Tuesday 12 PM to 2 PM", "Tuesday 2 PM to 4 PM", "Tuesday 4 PM to 6 PM",
-                        "Wednesday 8 AM to 10 AM", "Wednesday 10 AM to 12 PM", "Wednesday 12 PM to 2 PM", "Wednesday 2 PM to 4 PM", "Wednesday 4 PM to 6 PM",
-                        "Thursday 8 AM to 10 AM", "Thursday 10 AM to 12 PM", "Thursday 12 PM to 2 PM", "Thursday 2 PM to 4 PM", "Thursday 4 PM to 6 PM",
-                        "Friday 8 AM to 10 AM", "Friday 10 AM to 12 PM", "Friday 12 PM to 2 PM", "Friday 2 PM to 4 PM", "Friday 4 PM to 6 PM",
-                        "Saturday 8 AM to 10 AM", "Saturday 10 AM to 12 PM", "Saturday 12 PM to 2 PM", "Saturday 2 PM to 4 PM", "Saturday 4 PM to 6 PM",
-                        "Sunday 8 AM to 10 AM", "Sunday 10 AM to 12 PM", "Sunday 12 PM to 2 PM", "Sunday 2 PM to 4 PM", "Sunday 4 PM to 6 PM"],
-	"skill_list" :['JAVA', 'CPP', 'SQL', 'HTML', 'PHP', 'Javascript', 'Bash', 'Git', 'Mongo', 'WSS', 'GIS', 'Python', 'PMO'],
-	"users" : userdata}
-	#print(data)
-	return data
-
-
-pp = pprint.PrettyPrinter(indent=4)
 
 class UserData:
 	def __init__(self):
@@ -187,6 +47,19 @@ class UserData:
 	def get_skill_list(self):
 		return self.db["skill_list"]
 
+	# There are 3 things the admin can prioritize when running the algorithm: schedule, strength/weakness, and teammmate preference
+	def set_priorities(self, pri):
+		"""
+		pri should be an array which at null is [1,1,1]
+		Index 0 corresponds to scheduling, index 1 corresponds to strength/weakness and index 2 corresponds to teammate preference
+		If you want to select a feature to prioritize, increase the index of that feature by 1
+		For example, if I wanted to prioritize scheduling, pri = [2,1,1]
+		If I wanted to prioritize strengths/weakness, pri = [1,2,1]
+		If I wanted to prioritize teammate preference, pri = [1,1,2]
+		If user has no priority, simply do not call this function in main()
+		"""
+		self.db["priority"] = pri
+
 	def get_priorities(self):
 		return self.db["priority"]
 
@@ -195,7 +68,7 @@ U_NDX_NAME = 0
 U_NDX_SCHD = 1
 U_NDX_STRN = 2
 U_NDX_WEAK = 3
-U_NDX_TEAM = 4
+U_NDX_PREF = 4
 
 # Group indices
 G_NDX_SCORE = 0
@@ -223,6 +96,7 @@ class Groups:
 				"usr_name3" : ["usr_name3", [list of schedules], [list of strengths], [list of weaknesses], [list of preferred_teammate]],
 			},
 		]
+
 		'''
 
 		# Initialize the database.
@@ -279,10 +153,9 @@ class Groups:
 					if i in group[G_NDX_USERS][other][U_NDX_STRN]:
 						group[G_NDX_SCORE] += self.priority[PRIORITY_SKILL]
 
-				for i in group[G_NDX_USERS][user][U_NDX_TEAM]:
+				for i in group[G_NDX_USERS][user][U_NDX_PREF]:
 					if i == group[G_NDX_USERS][other][U_NDX_NAME]:
 						group[G_NDX_SCORE] += self.priority[PRIORITY_PREF]
-
 
 	def get_size(self):
 		return len(self.groups)
@@ -308,10 +181,7 @@ class Groups:
 		del group[G_NDX_USERS][user_name]
 		self._compute_group_score(group)
 
-	def set_priority(self, arr_priority):
-		self.priority = arr_priority
-
-	def print_scores(self, group_index):
+	def print_groups_scores(self, group_index):
 		print(self.groups[group_index][G_NDX_SCORE], end = "  ")
 		print(list(self.groups[group_index][G_NDX_USERS].keys()))
 
@@ -351,6 +221,7 @@ class Groups:
 
 def main():
 	#pdb.set_trace()
+
 	random.seed(int(time.time()))
 	n = int(input("Enter the number of groups: "))
 	groups = Groups(n)
@@ -358,7 +229,7 @@ def main():
 
 	print("==== Groups before simulation ====")
 	for i in range(group_size):
-		groups.print_scores(i)
+		groups.print_groups_scores(i)
 
 	print("Working...")
 	arr_group = range(group_size)
@@ -366,13 +237,13 @@ def main():
 
 	print("==== Groups after simulation ====")
 	for i in range(group_size):
-		groups.print_scores(i)
+		groups.print_groups_scores(i)
 
 	arr_group = [0,1,2]
 	groups.run_simulation(arr_group)
 	print("==== Groups after sub-group simulation ====")
 	for i in range(group_size):
-		groups.print_scores(i)
+		groups.print_groups_scores(i)
 
 	arr_priority = [1,1,2]
 	groups.set_priority(arr_priority)
@@ -380,7 +251,7 @@ def main():
 
 	print("==== Groups after changing priority (sched to teammate) ====")
 	for i in range(group_size):
-		groups.print_scores(i)
+		groups.print_groups_scores(i)
 
 if __name__ == '__main__':
 	main()
