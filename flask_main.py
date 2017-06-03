@@ -84,16 +84,13 @@ def login():
 def landing():
 	app.logger.debug("Dashboard page entry")
 	app.logger.debug("Getting accounts now")
+
+	account =  collection.find_one({"user": flask.session['user']})
 	
-	accountID = flask.session['user']
-	account =  collection.find_one({"_id": ObjectId(accountID)})
-	login = account['login']
-	
-	flask.session['first'] = login['first']
-	flask.session['last'] = login['last']
-	flask.session['email'] = login['email']
-	flask.session['avail'] = account['avail']
+	flask.session['role'] = account['role']
 	flask.session['accounts'] = get_accounts()
+	
+	flask.session['admin'] = "admin"
 	
 	return render_template('main.html')
 	
@@ -300,7 +297,7 @@ def login_user():
 
 	if input_pwd == pwd:
 		#Sets the login session for the user
-		flask.session['user'] =  str(account['_id'])
+		flask.session['user'] =  account['user']
 		
 		return redirect("/dashboard")
 	else:
