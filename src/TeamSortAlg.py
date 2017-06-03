@@ -96,7 +96,6 @@ class Groups:
 				"usr_name3" : ["usr_name3", [list of schedules], [list of strengths], [list of weaknesses], [list of preferred_teammate]],
 			},
 		]
-
 		'''
 
 		# Initialize the database.
@@ -240,29 +239,23 @@ def main():
 	n = int(input("Enter the number of groups: "))
 	groups = Groups(n)
 	group_size = groups.get_size()
-
 	print("==== Groups before simulation ====")
 	for i in range(group_size):
 		groups.print_groups_scores(i)
-
 	print("Working...")
 	arr_group = range(group_size)
 	groups.run_simulation(arr_group)
-
 	print("==== Groups after simulation ====")
 	for i in range(group_size):
 		groups.print_groups_scores(i)
-
 	arr_group = [0,1,2]
 	groups.run_simulation(arr_group)
 	print("==== Groups after sub-group simulation ====")
 	for i in range(group_size):
 		groups.print_groups_scores(i)
-
 	arr_priority = [1,1,2]
 	groups.set_priority(arr_priority)
 	groups.run_simulation(arr_group)
-
 	print("==== Groups after changing priority (sched to teammate) ====")
 	for i in range(group_size):
 		groups.print_groups_scores(i)
