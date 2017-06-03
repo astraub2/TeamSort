@@ -62,23 +62,18 @@
 	  +++ Announcement +++ Announcement +++ Announcement +++ Announcement +++ Announcement +++ Announcement +++ Announcement +++
 	  </p>
   </div>
-  {% if session.accounts %}
-	  {% for account in session.accounts %}
+  {% if session.groups %}
+	  {% for group in session.groups %}
 	  	<div class="container">
 	    	<div class="row">
 	      	<!-- User tile -->
 	      	<div class="one-half column user main">
-	        	<div class="userimage"></div>
 	        	<div class="userinfo">
-	        	  <p><b>Availability:</b>{% if account.avail %} {{ account.avail }} {% else %} No Availability {% endif %}</p>
-	        	  <p><b>Name:</b> {{ account.first }} {{ account.last }} </p>
-	        	  <p><b>Major:</b>{% if account.major %} {{ account.major }} {% else %} Major not declared {% endif %}</p>
-        		  <p><b>Mail:</b> {{ account.email }} </p>
-    	    	  <p><b>Phone:</b> {{ account.phone }} </p>
-	        	</div>
-        		<div class="userquote">
-        		  <p> {% if account.quote %} {{ account.quote }} {% else %} To write a quote or not to write a quote, that is the question {% endif %} </p>
-    		    </div>
+	        	  <p><b>{{ group.name }}</b></p>
+				  {% for user in group.userList %}
+				  <p>{{ user.first }}&nbsp;{{user.last}}</p>
+				  {% endfor %}
+				</div>
     		  </div>
     		  <!-- End of user tile -->
     		</div>
