@@ -292,7 +292,7 @@ def login_user():
 	
 	#Strips any excess whitespace and then attempts to find a user
 	account = collection.find_one({"user": input_email.strip()})
-	print(account)
+	#Sprint(account)
 	if account is None:
 		flash("Account not found!")
 		return redirect("/login")
@@ -906,7 +906,8 @@ class Groups:
 
 def Algorithm(n):
 	#pdb.set_trace()
-
+	n = int(input("Enter the number of groups: "))
+	groups = Groups(n)
 	random.seed(int(time.time()))
 	#n = int(input("Enter the number of groups: "))
 	groups = Groups(n)
