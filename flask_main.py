@@ -318,6 +318,10 @@ def manage_accounts():
 	"""
 	Manage accounts by accountID
 	"""
+	number=3
+	groups=Algorithm(number)
+	flask.session["new_group"]=groups
+	print(groups)
 
 	print("Getting selected account ids and action...")
 	selectedAccounts = request.form.getlist('selected')
@@ -331,12 +335,13 @@ def manage_accounts():
 
 	if actionToPerform == "generate":
 		print("Generating data to be sorted")
-		
 		groupSize = request.form.get('GroupSizeInput')
+		print(GroupSizeInput)
 		groupSizeRange = request.form.get('GroupSizeRangeInput')
 		
 		accountData = []
 		for accountID in selectedAccounts:
+			print(accountID)
 			account =  collection.find_one({"_id": ObjectId(accountID)})
 			accountData.append(account)
 
@@ -449,8 +454,7 @@ def insert_group(login, avail, exp):
 			"avail" : avail,
 			"exp"	: exp
 	}
-
-collection.insert(account)
+	collection.insert(account)
 	print("Account has been inserted into the database.")
 	flash("Account created! You may now login.")
 	
@@ -825,6 +829,7 @@ class Groups:
 	def print_groups_scores(self, group_index):
 		print(self.groups[group_index][G_NDX_SCORE], end = "  ")
 		print(list(self.groups[group_index][G_NDX_USERS].keys()))
+		return list(self.groups[group_index][G_NDX_USERS].keys())
 
 	def get_group_score(self, group):
 		return group[G_NDX_SCORE]
@@ -860,11 +865,11 @@ class Groups:
 				self.add_user_to_group(rg2, user2)
 
 
-def Algorithm():
+def Algorithm(n):
 	#pdb.set_trace()
 
 	random.seed(int(time.time()))
-	n = int(input("Enter the number of groups: "))
+	#n = int(input("Enter the number of groups: "))
 	groups = Groups(n)
 	group_size = groups.get_size()
 
@@ -877,22 +882,27 @@ def Algorithm():
 	groups.run_simulation(arr_group)
 
 	print("==== Groups after simulation ====")
+	group=[]
 	for i in range(group_size):
-		groups.print_groups_scores(i)
+		members=groups.print_groups_scores(i)
+		group.append(members)
+	return group
 
-	arr_group = [0,1,2]
-	groups.run_simulation(arr_group)
-	print("==== Groups after sub-group simulation ====")
-	for i in range(group_size):
-		groups.print_groups_scores(i)
 
-	arr_priority = [1,1,2]
-	#groups.set_priority(arr_priority)
-	groups.run_simulation(arr_group)
 
-	print("==== Groups after changing priority (sched to teammate) ====")
-	for i in range(group_size):
-		groups.print_groups_scores(i)
+	# arr_group = [0,1,2]
+	# groups.run_simulation(arr_group)
+	# print("==== Groups after sub-group simulation ====")
+	# for i in range(group_size):
+	# 	groups.print_groups_scores(i)
+
+	# arr_priority = [1,1,2]
+	# #groups.set_priority(arr_priority)
+	# groups.run_simulation(arr_group)
+
+	# print("==== Groups after changing priority (sched to teammate) ====")
+	# for i in range(group_size):
+	# 	groups.print_groups_scores(i)
 
 
 

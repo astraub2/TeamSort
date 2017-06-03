@@ -62,17 +62,15 @@
 	  +++ Announcement +++ Announcement +++ Announcement +++ Announcement +++ Announcement +++ Announcement +++ Announcement +++
 	  </p>
   </div>
-  {% if session.groups %}
-	  {% for group in session.groups %}
+  {% if session.new_group %}
+	  {% for group in session.new_group %}
 	  	<div class="container">
 	    	<div class="row">
 	      	<!-- User tile -->
 	      	<div class="one-half column user main">
 	        	<div class="userinfo">
-	        	  <p><b>{{ group.name }}</b></p>
-				  {% for user in group.userList %}
-				  <p>{{ user.first }}&nbsp;{{user.last}}</p>
-				  {% endfor %}
+	        	  <p><b>{{ group }}</b></p>
+				  
 				</div>
     		  </div>
     		  <!-- End of user tile -->
