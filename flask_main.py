@@ -410,7 +410,28 @@ def get_accounts():
 	accounts.sort(key=lambda a: a["date"])
 	return accounts
 
-def insert_account(login, avail, exp):
+def insert_group(groupNumber, userList):
+	"""
+	Inserts an new group into the database with user info in a list with a given group number.
+	"""
+	date = arrow.utcnow().format('MM/DD/YYYY')
+	dt = arrow.get(date, 'MM/DD/YYYY').replace(tzinfo='local')
+	iso_dt = dt.isoformat()
+	
+	print("Compiling new account from data")
+	group = {
+			"type"		:  "group",
+			"date"		: iso_dt,
+			"name"		: "Group" + str(groupNumber),
+			"members"	: userList
+	}
+
+	collection.insert(group)
+	print("Group has been inserted into the database.")
+	
+	return
+
+def insert_group(login, avail, exp):
 	"""
 	Inserts an new account into the database with minimum user info
 	"""
@@ -420,16 +441,16 @@ def insert_account(login, avail, exp):
 	
 	print("Compiling new account from data")
 	account = {
-		"type" :  "account",
+		"type" :  "group",
 			"date"	: iso_dt,
-			"role"	: "admin",
+			"name"	: "admin",
 			"user"	: login["email"],
 			"login" : login,
 			"avail" : avail,
 			"exp"	: exp
 	}
 
-	collection.insert(account)
+collection.insert(account)
 	print("Account has been inserted into the database.")
 	flash("Account created! You may now login.")
 	
