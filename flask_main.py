@@ -292,7 +292,7 @@ def login_user():
 	
 	#Strips any excess whitespace and then attempts to find a user
 	account = collection.find_one({"user": input_email.strip()})
-	print(account)
+	#Sprint(account)
 	if account is None:
 		flash("Account not found!")
 		return redirect("/login")
@@ -318,6 +318,10 @@ def manage_accounts():
 	"""
 	Manage accounts by accountID
 	"""
+	number=3
+	groups=Algorithm(number)
+	flask.session["new_group"]=groups
+	print(groups)
 
 	print("Getting selected account ids and action...")
 	selectedAccounts = request.form.getlist('selected')
@@ -331,18 +335,19 @@ def manage_accounts():
 
 	if actionToPerform == "generate":
 		print("Generating data to be sorted")
-		
 		groupSize = request.form.get('GroupSizeInput')
+		print(GroupSizeInput)
 		groupSizeRange = request.form.get('GroupSizeRangeInput')
 		
 		accountData = []
 		for accountID in selectedAccounts:
+			print(accountID)
 			account =  collection.find_one({"_id": ObjectId(accountID)})
 			accountData.append(account)
 
 
 
-	return redirect("/manage")
+	return redirect("/dashboard")
 	
 @app.route("/_update", methods=["POST"])
 def update_user():
@@ -449,8 +454,7 @@ def insert_group(login, avail, exp):
 			"avail" : avail,
 			"exp"	: exp
 	}
-
-collection.insert(account)
+	collection.insert(account)
 	print("Account has been inserted into the database.")
 	flash("Account created! You may now login.")
 	
@@ -566,7 +570,6 @@ def generateUserData():
 	return data
 
 def regenerateUserData(newemailarray):
-	
 	accounts=get_accounts()
 	print(accounts)
 	print('HIIIIIIIIIIIi')
@@ -651,8 +654,6 @@ def regenerateUserData(newemailarray):
 	#print (accounts)
 	return data
 
-
-
 class UserData:
 	def __init__(self):
 		if TEST_DATA:
@@ -720,6 +721,39 @@ PRIORITY_SCHED = 0
 PRIORITY_SKILL = 1
 PRIORITY_PREF = 2
 
+'''
+		In many places in the program a single user record is accessed using the following compound syntax:
+
+		g[G_NDX_USERS][user_rec[U_NDX_NAME]]
+
+		The explanation for this is as follows:
+
+		g is groups which is represented as follows and G_NDX_USERS is set to 1.   user_rec is each key value pair in the dictionary that is the second element of the groups array.  U_NDX_NAME refers to the 0th element of the user_rec.
+			group[i] = [
+				computed_group_weight, 
+				{
+					"usr_name0" : ["usr_name0", [list of schedules], [list of strengths], [list of weaknesses], [list of preferred_teammate]],
+					"usr_name1" : ["usr_name1", [list of schedules], [list of strengths], [list of weaknesses], [list of preferred_teammate]],
+					"usr_name2" : ["usr_name2", [list of schedules], [list of strengths], [list of weaknesses], [list of preferred_teammate]],
+					"usr_name3" : ["usr_name3", [list of schedules], [list of strengths], [list of weaknesses], [list of preferred_teammate]]
+				}
+			]
+
+		An illustration of its use is described below:
+
+		1.  A single User record is obtained as follows:
+
+			user_rec = db.get_next_user()
+
+		2.  user_rec[U_NDX_NAME] refers to the user name.
+
+		3.  g[G_NDX_USERS][user_rec[U_NDX_NAME]] refers to a single user record.  For example for "usr_name0", its value (from the above description) is as follows:
+
+			["usr_name0", [list of schedules], [list of strengths], [list of weaknesses], [list of preferred_teammate]]
+
+		This record is useful for getting attributes of a single user.
+
+		'''
 class Groups:
 	def __init__(self, groupcount):
 		self.groupcount = groupcount
@@ -737,7 +771,6 @@ class Groups:
 				"usr_name3" : ["usr_name3", [list of schedules], [list of strengths], [list of weaknesses], [list of preferred_teammate]],
 			},
 		]
-
 		'''
 
 		# Initialize the database.
@@ -825,6 +858,7 @@ class Groups:
 	def print_groups_scores(self, group_index):
 		print(self.groups[group_index][G_NDX_SCORE], end = "  ")
 		print(list(self.groups[group_index][G_NDX_USERS].keys()))
+		return list(self.groups[group_index][G_NDX_USERS].keys())
 
 	def get_group_score(self, group):
 		return group[G_NDX_SCORE]
@@ -836,6 +870,16 @@ class Groups:
 			return None 
 
 	def run_simulation(self, arr_group):
+		"""
+		arr_group is an array of the groups that need to be run.
+		By default, this includes all groups. However, if the user only wants re-run specific groups, arr-group will be changed.
+		For example, if I have 5 groups, arr_group will look like this: 
+		[0,1,2,3,4] 
+		Let's say I don't like how the first 3 groups were sorted and I want to re-run them. 
+		The arr_group should be changed to:
+		[0,1,2]
+		This is a feature that will be implemented by the UI in the near future.
+		"""
 		for i in range(5000):
 			rg1 = self.get_group(random.choice(arr_group))
 			rg2 = self.get_group(random.choice(arr_group))
@@ -860,11 +904,12 @@ class Groups:
 				self.add_user_to_group(rg2, user2)
 
 
-def Algorithm():
+def Algorithm(n):
 	#pdb.set_trace()
-
-	random.seed(int(time.time()))
 	n = int(input("Enter the number of groups: "))
+	groups = Groups(n)
+	random.seed(int(time.time()))
+	#n = int(input("Enter the number of groups: "))
 	groups = Groups(n)
 	group_size = groups.get_size()
 
@@ -877,22 +922,27 @@ def Algorithm():
 	groups.run_simulation(arr_group)
 
 	print("==== Groups after simulation ====")
+	group=[]
 	for i in range(group_size):
-		groups.print_groups_scores(i)
+		members=groups.print_groups_scores(i)
+		group.append(members)
+	return group
 
-	arr_group = [0,1,2]
-	groups.run_simulation(arr_group)
-	print("==== Groups after sub-group simulation ====")
-	for i in range(group_size):
-		groups.print_groups_scores(i)
 
-	arr_priority = [1,1,2]
-	#groups.set_priority(arr_priority)
-	groups.run_simulation(arr_group)
+	#Debug
+	# arr_group = [0,1,2]
+	# groups.run_simulation(arr_group)
+	# print("==== Groups after sub-group simulation ====")
+	# for i in range(group_size):
+	# 	groups.print_groups_scores(i)
 
-	print("==== Groups after changing priority (sched to teammate) ====")
-	for i in range(group_size):
-		groups.print_groups_scores(i)
+	# arr_priority = [1,1,2]
+	# #groups.set_priority(arr_priority)
+	# groups.run_simulation(arr_group)
+
+	# print("==== Groups after changing priority (sched to teammate) ====")
+	# for i in range(group_size):
+	# 	groups.print_groups_scores(i)
 
 
 
