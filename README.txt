@@ -82,12 +82,8 @@ It is important that you:
 --name the file "userdata.csv"
 
 *******
-<<<<<<< HEAD
-If you would like to test TeamSort without generating data, good news!!! We have TestData. It can be ran from the command line using: make testdata
-=======
 
-If you would like to test TeamSort without generating data, good news!!! We have created a fake set of data for you to test with called TestData. Turn on TestData and generate the data.
->>>>>>> dev
+If you would like to test TeamSort without generating data, good news!!! We have TestData. It can be ran from the command line using: make testdata
 
 *******
 

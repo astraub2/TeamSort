@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Dashboard</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="static/css/normalize.css">
+  <link rel="stylesheet" href="static/css/skeleton.css">
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+</head>
+<body>
+<!-- Flashed messages before content -->
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class="flashesList">
+    {% for message in messages %}
+      <li class=flashes>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+   <!-- Menu -->
+     <div class ="dashboardBackground"> 
+    <div class="navbar">
+      <div class="navlogo">
+        <p class="logoimg">Logo</p>
+      </div>
+      <div class="navcenter"></div>
+      <div class="navbuttons">
+        <ul>
+          <li class="menuitems" onclick="document.location='/update'">Edit</li>
+		  {% if session.role == session.admin %}
+			  <li class="menuitems" onclick="document.location='/manage'">Manage</li>
+		  {% endif %}
+        </ul>
+      </div>
+    </div>
+    <!-- End menu -->
+  <div class="publicannouncement">
+      <p>
+	  +++ Announcement +++ Announcement +++ Announcement +++ Announcement +++ Announcement +++ Announcement +++ Announcement +++
+	  </p>
+  </div>
+  {% if session.new_group %}
+	  {% for group in session.new_group %}
+	  	<div class="container">
+	    	<div class="row">
+	      	<!-- User tile -->
+	      	<div class="one-half column user main">
+	        	<div class="userinfo">
+              {% for i in group %}
+	        	    <p><b>{{i}}</b></p>
+                {% endfor %}
+				  
+				</div>
+    		  </div>
+    		  <!-- End of user tile -->
+    		</div>
+  		</div></div>
+  	{% endfor %}
+  	{% else %}
+  		<p>No accounts found.</p>
+  {% endif %}
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>
