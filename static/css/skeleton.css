@@ -720,14 +720,16 @@ html, body{height:100%;}
 #half-left {
     display: inline-block;
     margin-top: 1.5rem;
-    margin-right: 10%;
+    margin-right: 4%;
+	margin-bottom: 0;
     width: 45%;
 }
 
 #half-right {
   display: inline-block;
-  float: right;
   margin-top: 1.5rem;
+  margin-left: 4%;
+  margin-bottom: 0;
   width: 45%;
 }
 
