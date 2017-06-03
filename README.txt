@@ -13,7 +13,6 @@ Jared Smith
 ---------------------------------------------------------------------
 In order to run our TeamSort, you must have the following apps installed:
 Python 3
-Homebrew
 ---------------------------------------------------------------------
 You must have Python 3 successfully installed.
 To check if the correct version is installed: python3 -V in the command prompt. 
@@ -33,8 +32,16 @@ brew arrow
 brew flask
 brew pymongo
 
+Configure program:
+Copy and rename CONFIG.base.py to CONFIG.py
+Enter valid login information for database access (your login information)
+
+Install the necessary modules (if needed):
+pip install -r requirements.txt
+
 Install the necessary modules into the virtual environment:
 make install
+
 Install the virtual environment and run program:
 make run
 
