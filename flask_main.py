@@ -870,6 +870,16 @@ class Groups:
 			return None 
 
 	def run_simulation(self, arr_group):
+		"""
+		arr_group is an array of the groups that need to be run.
+		By default, this includes all groups. However, if the user only wants re-run specific groups, arr-group will be changed.
+		For example, if I have 5 groups, arr_group will look like this: 
+		[0,1,2,3,4] 
+		Let's say I don't like how the first 3 groups were sorted and I want to re-run them. 
+		The arr_group should be changed to:
+		[0,1,2]
+		This is a feature that will be implemented by the UI in the near future.
+		"""
 		for i in range(5000):
 			rg1 = self.get_group(random.choice(arr_group))
 			rg2 = self.get_group(random.choice(arr_group))

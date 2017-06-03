@@ -79,6 +79,40 @@ PRIORITY_SCHED = 0
 PRIORITY_SKILL = 1
 PRIORITY_PREF = 2
 
+'''
+In many places in the program a single user record is accessed using the following compound syntax:
+
+g[G_NDX_USERS][user_rec[U_NDX_NAME]]
+
+The explanation for this is as follows:
+
+g is groups which is represented as follows and G_NDX_USERS is set to 1.   user_rec is each key value pair in the dictionary that is the second element of the groups array.  U_NDX_NAME refers to the 0th element of the user_rec.
+	group[i] = [
+		computed_group_weight, 
+		{
+			"usr_name0" : ["usr_name0", [list of schedules], [list of strengths], [list of weaknesses], [list of preferred_teammate]],
+			"usr_name1" : ["usr_name1", [list of schedules], [list of strengths], [list of weaknesses], [list of preferred_teammate]],
+			"usr_name2" : ["usr_name2", [list of schedules], [list of strengths], [list of weaknesses], [list of preferred_teammate]],
+			"usr_name3" : ["usr_name3", [list of schedules], [list of strengths], [list of weaknesses], [list of preferred_teammate]]
+		}
+	]
+
+An illustration of its use is described below:
+
+1.  A single User record is obtained as follows:
+
+	user_rec = db.get_next_user()
+
+2.  user_rec[U_NDX_NAME] refers to the user name.
+
+3.  g[G_NDX_USERS][user_rec[U_NDX_NAME]] refers to a single user record.  For example for "usr_name0", its value (from the above description) is as follows:
+
+	["usr_name0", [list of schedules], [list of strengths], [list of weaknesses], [list of preferred_teammate]]
+
+This record is useful for getting attributes of a single user.
+
+'''
+
 class Groups:
 	def __init__(self, groupcount):
 		self.groupcount = groupcount
@@ -227,11 +261,18 @@ class Groups:
 
 def main():
 	random.seed(int(time.time()))
-	#n = int(input("Enter the number of groups: ")) #WE NEED TO GET n FROM THE DATABASE 
+	n = int(input("Enter the number of groups: "))
 	groups = Groups(n)
 	group_size = groups.get_size()
+	print("==== Groups before simulation ====")
+	for i in range(group_size):
+		groups.print_groups_scores(i)
+	print("Working...")
+	arr_group = range(group_size)
 	groups.run_simulation(arr_group)
-
+	print("==== Groups after simulation ====")
+	for i in range(group_size):
+		groups.print_groups_scores(i)
 #DEBUG CODE FOR TEST DATA 
 #pdb.set_trace()
 """
