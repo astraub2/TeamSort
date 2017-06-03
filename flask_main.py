@@ -532,10 +532,12 @@ def generateUserData():
 	"skill_list" :['java', 'python', 'swift', 'php', 'c', 'javascript'],
 	"users" : users, 
 	"current_index" : 0,
-	"priority" : [1,1,1]}
+	"priority" : [1,1,1]
+	}
 
 	#print (accounts)
 	return data
+
 def regenerateUserData(newemailarray):
 	
 	accounts=get_accounts()
