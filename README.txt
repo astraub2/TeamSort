@@ -22,16 +22,6 @@ https://www.python.org/downloads/
 
 Follow directions for your system. 
 ---------------------------------------------------------------------
-You must have Homebrew successfully installed.
-
-To install from command line:
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-
-Install the necessary modules (if needed):
-brew arrow
-brew flask
-brew pymongo
-
 Configure program:
 Copy and rename CONFIG.base.py to CONFIG.py
 Enter valid login information for database access (your login information)
