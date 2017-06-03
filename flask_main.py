@@ -541,6 +541,8 @@ def generateUserData():
 def regenerateUserData(newemailarray):
 	
 	accounts=get_accounts()
+	print(accounts)
+	print('HIIIIIIIIIIIi')
 	experiencearray=[]
 	bexperiencearray=[]
 	emailarray=[]
@@ -594,6 +596,10 @@ def regenerateUserData(newemailarray):
 						myavail.append(i+" " +j)
 				count+=1
 			availarray.append(myavail)
+			#############
+			#Grab prefered teamate
+			############
+
 		# print ("\n\n")
 		# print(i['user'])
 		# print(i['exp']['pro'])
@@ -761,9 +767,9 @@ class Groups:
 					if i in group[G_NDX_USERS][other][U_NDX_STRN]:
 						group[G_NDX_SCORE] += self.priority[PRIORITY_SKILL]
 
-				for i in group[G_NDX_USERS][user][U_NDX_PREF]:
-					if i == group[G_NDX_USERS][other][U_NDX_NAME]:
-						group[G_NDX_SCORE] += self.priority[PRIORITY_PREF]
+				# for i in group[G_NDX_USERS][user][U_NDX_PREF]:
+				# 	if i == group[G_NDX_USERS][other][U_NDX_NAME]:
+				# 		group[G_NDX_SCORE] += self.priority[PRIORITY_PREF]
 
 	def get_size(self):
 		return len(self.groups)
