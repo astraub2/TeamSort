@@ -7,10 +7,6 @@ env:
 PYVENV = pyvenv
 INVENV = . env/bin/activate ;
 
-install:
-	make env
-	make run
-
 run:	env
 	($(INVENV) python3 flask_main.py ||  true )
 
