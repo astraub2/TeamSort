@@ -347,7 +347,7 @@ def manage_accounts():
 
 
 
-	return redirect("/manage")
+	return redirect("/dashboard")
 	
 @app.route("/_update", methods=["POST"])
 def update_user():

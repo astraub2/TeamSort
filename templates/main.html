@@ -69,7 +69,9 @@
 	      	<!-- User tile -->
 	      	<div class="one-half column user main">
 	        	<div class="userinfo">
-	        	  <p><b>{{ group }}</b></p>
+              {% for i in group %}
+	        	    <p><b>{{i}}</b></p>
+                {% endfor %}
 				  
 				</div>
     		  </div>
