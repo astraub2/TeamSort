@@ -83,7 +83,6 @@ def exp():
 	
 @app.route("/login")
 def login():
-	Algorithm()
 	app.logger.debug("Login page entry")
 	return render_template('login.html')
 
