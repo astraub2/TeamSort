@@ -30,7 +30,7 @@ Install the necessary modules (if needed):
 pip install -r requirements.txt
 
 Install the necessary modules into the virtual environment:
-make install
+make env
 
 Install the virtual environment and run program:
 make run
@@ -45,7 +45,7 @@ FEATURES:
 WebApp:
 With our webapp, we have moved away from using an outside poll/survey to get data from students. Students will be logging on and then filling out the survey. This allowed us to be able to customize our survey more easily. 
 
-We have also added the ability for the admin to decide which features they would like to priotitize. Based on what the admin chooses, the scoring system will be adjusted. 
+We have also added the ability for the admin to decide which features they would like to prioritize. Based on what the admin chooses, the scoring system will be adjusted. 
 
 Sorting Algorithm:
 4 main criteria: scheduling, strengths, weaknesses, and teammate preference. 
@@ -55,7 +55,7 @@ Finally, if a teammate is placed in a group with someone they preferred, the sco
 
 First, the program randomly assigns students to a team. Then the teams will be shuffled 1000 times with the intent of maximizing team scores to create higher compatibility. After maximizing, the algorithm will output what the new teams are. If the admin would like to regenerate the teams for any reason, they have the ability to do so. 
 
-Currently the algorithm is set up to allow the admin to deicde which crition they would like to prioritize. However we do not have ability to do so from our webapp. This must be done from within the algorithm and there are instructions provided for that in the comments.
+Currently the algorithm is set up to allow the admin to decide which criteria they would like to prioritize. However we do not have ability to do so from our webapp. This must be done from within the algorithm and there are instructions provided for that in the comments.
 
 ---------------------------------------------------------------------
 ---------------------------------------------------------------------
