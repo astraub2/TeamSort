@@ -94,22 +94,21 @@ def landing():
 	account =  collection.find_one({"user": flask.session['user']})
 	
 	flask.session['role'] = account['role']
-	flask.session['accounts'] = get_accounts()
-	
 	flask.session['admin'] = "admin"
 	
 	return render_template('main.html')
 	
-@app.route("/user")
+@app.route("/manage")
+def manage():
+	app.logger.debug("Manage page entry")
+	flask.session['accounts'] = get_accounts()
+	return render_template('manage.html')
+
+@app.route("/edit")
 def user():
 	app.logger.debug("Update account page entry")
 	app.logger.debug("Getting account now")
 	return render_template('usermenu.html')
-	
-@app.route("/manage")
-def manage():
-	app.logger.debug("Manage page entry")
-	return render_template('manage.html')
 
 @app.errorhandler(404)
 def page_not_found(error):

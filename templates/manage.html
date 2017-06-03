@@ -92,10 +92,10 @@
 										  </select>
 									  </td>
 									  <td>
-										  <button type="submit" name="action" value="generate">Generate Selected</button>
+										  <button type="submit" name="action" value="generate">Generate</button>
 									  </td>
 									  <td>
-										  <button type="submit" name="action" value="delete">Delete Selected</button>
+										  <button type="submit" name="action" value="delete">Delete</button>
 									  </td>
 								  </tr>
 								  <tr>
@@ -109,17 +109,15 @@
 							  </thead>
 							  <tbody>
 								  {% for account in session.accounts %}
-									  {% if account.user is not session.user %}
-										  <!--- {% if account.role is not "admin" %} --->
-											  <tr>
-											      <td>
-													  <input type="checkbox" name="selected" value="{{account._id}}"></td>
-												  <td>{{ account.login.first }}</td>
-												  <td>{{ account.login.last }}</td>
-												  <td>{{ account.user }}</td>
-												  <td>{{ account.date }}</td>
-											  </tr>
-										  <!--- {% endif %} --->
+									  {% if session.user != account.user %}
+										  <tr>
+											  <td>
+												  <input type="checkbox" name="selected" value="{{account._id}}"></td>
+											  <td>{{ account.login.first }}</td>
+											  <td>{{ account.login.last }}</td>
+											  <td>{{ account.user }}</td>
+											  <td>{{ account.date }}</td>
+										  </tr>
 									  {% endif %}
 								  {% endfor %}
 							  </tbody>
