@@ -76,6 +76,9 @@
 					  <div class="one-half column user main">
 						  <h5>{{group.name}}</h5>
 						  <div class="userinfo">
+              {% for user in group %}
+              <p><b>{{user}}</b></p>
+              {% endfor %}
 						  {% for user in group.userList %}
 						  <p><b>{{user.first}}&nbsp;{{user.last}}</b></p>
 						  {% endfor %}

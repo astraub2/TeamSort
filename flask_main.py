@@ -347,10 +347,10 @@ def manage_accounts():
 		#
 		####
 
-		number=3
-		groups=Algorithm(number)
-		flask.session["groups"] = groups
-		print(groups)
+		
+	groups=Algorithm()
+	flask.session["groups"] = groups
+	print(groups)
 
 	return redirect("/dashboard")
 	
@@ -927,7 +927,7 @@ class Groups:
 				self.add_user_to_group(rg2, user2)
 
 
-def Algorithm(n):
+def Algorithm():
 	#pdb.set_trace()
 	n = int(input("Enter the number of groups: "))
 	groups = Groups(n)
