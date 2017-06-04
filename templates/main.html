@@ -27,63 +27,68 @@
 
 </head>
 <body>
-<!-- Flashed messages before content -->
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <ul class="flashesList">
-    {% for message in messages %}
-      <li class=flashes>{{ message }}</li>
-    {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
-
+	
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-   <!-- Menu -->
-     <div class ="dashboardBackground"> 
-    <div class="navbar">
-      <div class="navlogo">
-        <p class="logoimg">Logo</p>
-      </div>
-      <div class="navcenter"></div>
-      <div class="navbuttons">
-        <ul>
-          <li class="menuitems" onclick="document.location='/update'">Edit</li>
-		  {% if session.role == session.admin %}
-			  <li class="menuitems" onclick="document.location='/manage'">Manage</li>
+  <div class ="dashboardBackground">
+	  <div class="container">
+		  <!-- Flashed messages before content -->
+		  {% with messages = get_flashed_messages() %}
+		  {% if messages %}
+			  <ul class="flashesList">
+				  {% for message in messages %}
+					  <li class=flashes>{{ message }}</li>
+				  {% endfor %}
+			  </ul>
 		  {% endif %}
-        </ul>
-      </div>
-    </div>
-    <!-- End menu -->
-  <div class="publicannouncement">
-      <p>
-	  +++ Announcement +++ Announcement +++ Announcement +++ Announcement +++ Announcement +++ Announcement +++ Announcement +++
-	  </p>
+		  {% endwith %}
+		  
+		  <!-- Menu -->
+		  <div class="navbar">
+			  <div class="navlogo">
+				  <p class="logoimg">Logo</p>
+			  </div>
+			  <div class="navcenter"></div>
+			  <div class="navbuttons">
+				  <ul>
+					  <li class="menuitems" onclick="document.location='/update'">Edit</li>
+					  {% if session.role == session.admin %}
+						  <li class="menuitems" onclick="document.location='/manage'">Manage</li>
+					  {% endif %}
+				  </ul>
+			  </div>
+		  </div>
+		  <!-- End menu -->
+		  
+		  <!-- Announcements -->
+		  <div class="publicannouncement">
+		  <p>
+		  +++ Announcement +++ Announcement +++ Announcement +++ Announcement +++ Announcement +++ Announcement +++ Announcement +++
+		  </p>
+		  </div>
+		  <!-- End announcements -->
+		  
+		  {% if session.new_group %}
+			  {% for group in session.new_group %}
+				  <div class="row">
+					  <!-- Group tile -->
+					  <div class="one-half column user main">
+						  <div class="userinfo">
+						  {% for i in group %}
+							  <p><b>{{i}}</b></p>
+						  {% endfor %}
+						  </div>
+					  </div>
+					  <!-- End of group tile -->
+				  </div>
+			  {% endfor %}
+		  {% else %}
+				  <h3>No groups found.</p>
+		  {% endif %}
+	  </div>
   </div>
-  {% if session.new_group %}
-	  {% for group in session.new_group %}
-	  	<div class="container">
-	    	<div class="row">
-	      	<!-- User tile -->
-	      	<div class="one-half column user main">
-	        	<div class="userinfo">
-              {% for i in group %}
-	        	    <p><b>{{i}}</b></p>
-                {% endfor %}
-				  
-				</div>
-    		  </div>
-    		  <!-- End of user tile -->
-    		</div>
-  		</div></div>
-  	{% endfor %}
-  	{% else %}
-  		<p>No accounts found.</p>
-  {% endif %}
-
-<!-- End Document
+  <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
 </body>
 </html>
