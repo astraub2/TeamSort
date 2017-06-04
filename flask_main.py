@@ -469,9 +469,9 @@ def insert_account(login, avail, exp):
 	
 	print("Compiling new account from data")
 	account = {
-		"type" :  "group",
+		"type" :  "account",
 			"date"	: iso_dt,
-			"name"	: "admin",
+			"role"	: "admin",
 			"user"	: login["email"],
 			"login" : login,
 			"avail" : avail,
