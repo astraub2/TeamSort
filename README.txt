@@ -22,8 +22,16 @@ https://www.python.org/downloads/
 
 Follow directions for your system. 
 ---------------------------------------------------------------------
-Configure program:
-Copy and rename CONFIG.base.py to CONFIG.py
+User Guide + Program Configuration:
+
+In command prompt (Terminal for Mac) enter "git clone https://github.com/astraub2/CIS422DEVEL.git"
+
+Change directory to the CIS422DEVEL folder.
+
+Enter "git pull origin web_app"
+
+Copy and rename the file "CONFIG.base.py" to "CONFIG.py"
+
 Enter valid login information for database access (your login information)
 
 Install the necessary modules (if needed):
@@ -34,6 +42,20 @@ make env
 
 Install the virtual environment and run program:
 make run
+
+Once command prompt displays the message "* Running on http://0.0.0.0:9001/ (Press CTRL+C to quit)"
+
+Open your web browser and go to the url: http://0.0.0.0:9001/
+
+Sign up/Login with your credentials. 
+
+Click on the Manage button in the top right corner. 
+
+There will be an option to "Select all members". Click the checkbox next to this and hit the generate button. 
+
+Go back to Command prompt and enter the number of groups you would the class to be divided into. 
+
+Once this is done, the web app should display the different groups by email. 
 
 Uninstall the program from the system:
 make veryclean
@@ -53,37 +75,15 @@ Sorting Algorithm:
 The more well suited a team is for each other, the higher “score” they have. The default is the more available times to meet among students in a team, results in a higher score. (ie. If a teammate’s strengths match another teammate’s weaknesses, the score is higher.)
 Finally, if a teammate is placed in a group with someone they preferred, the score of the team is higher. 
 
-First, the program randomly assigns students to a team. Then the teams will be shuffled 1000 times with the intent of maximizing team scores to create higher compatibility. After maximizing, the algorithm will output what the new teams are. If the admin would like to regenerate the teams for any reason, they have the ability to do so. 
+First, the program randomly assigns students to a team. Then the teams will be shuffled 1000 times with the intent of maximizing team scores to create higher compatibility. After maximizing, the algorithm will output what the new teams are. 
 
-Currently the algorithm is set up to allow the admin to decide which criteria they would like to prioritize. However we do not have ability to do so from our webapp. This must be done from within the algorithm and there are instructions provided for that in the comments.
+Currently the algorithm is set up to allow the admin to decide which criteria they would like to prioritize. However we do not have ability to do so from our webapp. This must be done from within the algorithm and there are instructions provided for that in the comments of the flask_main.py file. 
 
 ---------------------------------------------------------------------
 ---------------------------------------------------------------------
-User Guide:
-
-Provide the webapp link to all students. From the link, they will create an account and then fill out the survey. 
-
-It should be noted that when inputting teammate preference, you must have both the first and last names spelled correctly in order for the algorithm to use that piece of information.
-
-As an admin, you will have the ability to be able to decide which features you would like to priotitize. Once all the students have inputted data, you will press the "generate" button to generate the groups. They will then be displayed on the website. These results will be visible to the students as well (revealing no information about what information was filled out during the survey). 
  
-It is important that you:
---save the csv file in the import folder
---name the file "userdata.csv"
-
 *******
 
 If you would like to test TeamSort without generating data, good news!!! We have TestData. It can be ran from the command line using: make testdata
 
 *******
-
-You can now run the TeamSort simulation. From the repo home there is a file called TeamSort.sh. Run the following command:
-
-sh TeamSort.sh
-
-You will be prompted for how many teams you would like your class divided into.
-
-The resulting optomized teams will be displayed for you in the command prompt upon completion of the sort.
-
-=======
-
