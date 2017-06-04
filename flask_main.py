@@ -318,10 +318,6 @@ def manage_accounts():
 	"""
 	Manage accounts by accountID
 	"""
-	number=3
-	groups=Algorithm(number)
-	flask.session["new_group"]=groups
-	print(groups)
 
 	print("Getting selected account ids and action...")
 	selectedAccounts = request.form.getlist('selected')
@@ -345,7 +341,16 @@ def manage_accounts():
 			account =  collection.find_one({"_id": ObjectId(accountID)})
 			accountData.append(account)
 
+		#####
+		#
+		# Generates groups using the above data pulled from the Admin form to make groups.
+		#
+		####
 
+		number=3
+		groups=Algorithm(number)
+		flask.session["groups"] = groups
+		print(groups)
 
 	return redirect("/dashboard")
 	
@@ -407,6 +412,7 @@ def get_accounts():
 	
 	print("get_accounts() started.")
 	accounts = []
+	
 	for account in collection.find({"type" : "account"}):
 		account['date'] = arrow.get(account['date']).isoformat()
 		account['_id'] = str(account['_id'])
@@ -414,6 +420,23 @@ def get_accounts():
 
 	accounts.sort(key=lambda a: a["date"])
 	return accounts
+
+def get_groups():
+	"""
+	Returns all groups in the database, in a form that
+	can be inserted directly in the 'session' object.
+	"""
+
+	print("get_groups() started.")
+	groups = []
+
+	for group in collection.find({"type" : "group"}):
+		groups.append(group)
+
+	groups.sort(key=lambda g: g["name"])
+
+	return groups
+
 
 def insert_group(groupNumber, userList):
 	"""

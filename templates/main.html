@@ -69,14 +69,15 @@
 		  {% endif %}
 		  {% endwith %}
 		  
-		  {% if session.new_group %}
-			  {% for group in session.new_group %}
+		  {% if session.groups %}
+			  {% for group in session.groups %}
 				  <div class="row">
 					  <!-- Group tile -->
 					  <div class="one-half column user main">
+						  <h5>{{group.name}}</h5>
 						  <div class="userinfo">
-						  {% for i in group %}
-							  <p><b>{{i}}</b></p>
+						  {% for user in group.userList %}
+						  <p><b>{{user.first}}&nbsp;{{user.last}}</b></p>
 						  {% endfor %}
 						  </div>
 					  </div>
