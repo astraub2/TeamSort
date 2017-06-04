@@ -31,6 +31,32 @@
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <div class ="dashboardBackground">
+	  <!-- Menu -->
+	  <div class="navbar">
+		  <div class="navlogo">
+			  <p class="logoimg">Logo</p>
+		  </div>
+		  <div class="navcenter"></div>
+		  <div class="navbuttons">
+			  <ul>
+				  <li class="menuitems" onclick="document.location='/update'">Edit</li>
+				  {% if session.role == session.admin %}
+				  <li class="menuitems" onclick="document.location='/manage'">Manage</li>
+				  {% endif %}
+			  </ul>
+		  </div>
+	  </div>
+	  <!-- End menu -->
+	  
+	  <!-- Announcements -->
+	  <div class="publicannouncement">
+		  <p>
+		  +++ Announcement +++ Announcement +++ Announcement +++ Announcement +++ Announcement +++ Announcement +++ Announcement +++
+		  </p>
+	  </div>
+	  <!-- End announcements -->
+	  
+	  <!-- Groups -->
 	  <div class="container">
 		  <!-- Flashed messages before content -->
 		  {% with messages = get_flashed_messages() %}
@@ -42,31 +68,6 @@
 			  </ul>
 		  {% endif %}
 		  {% endwith %}
-		  
-		  <!-- Menu -->
-		  <div class="navbar">
-			  <div class="navlogo">
-				  <p class="logoimg">Logo</p>
-			  </div>
-			  <div class="navcenter"></div>
-			  <div class="navbuttons">
-				  <ul>
-					  <li class="menuitems" onclick="document.location='/update'">Edit</li>
-					  {% if session.role == session.admin %}
-						  <li class="menuitems" onclick="document.location='/manage'">Manage</li>
-					  {% endif %}
-				  </ul>
-			  </div>
-		  </div>
-		  <!-- End menu -->
-		  
-		  <!-- Announcements -->
-		  <div class="publicannouncement">
-		  <p>
-		  +++ Announcement +++ Announcement +++ Announcement +++ Announcement +++ Announcement +++ Announcement +++ Announcement +++
-		  </p>
-		  </div>
-		  <!-- End announcements -->
 		  
 		  {% if session.new_group %}
 			  {% for group in session.new_group %}
@@ -83,9 +84,14 @@
 				  </div>
 			  {% endfor %}
 		  {% else %}
-				  <h3>No groups found.</p>
+			  <div class="row" style="text-align:center">
+				  <br>
+				  <h3>No groups found.</h3>
+			  </div>
 		  {% endif %}
 	  </div>
+	  <!-- End groups -->
+	  
   </div>
   <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->

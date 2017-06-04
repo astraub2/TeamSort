@@ -436,7 +436,7 @@ def insert_group(groupNumber, userList):
 	
 	return
 
-def insert_group(login, avail, exp):
+def insert_account(login, avail, exp):
 	"""
 	Inserts an new account into the database with minimum user info
 	"""
